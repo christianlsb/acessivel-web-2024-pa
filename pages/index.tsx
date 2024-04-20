@@ -8,7 +8,9 @@ export default function Home() {
         <title>+Acessivel</title>
       </Head>
       <Header />
-      <main>{/* <HomeSection /> */}</main>
+      <main>
+        <HomeSection />
+      </main>
     </>
   );
 }

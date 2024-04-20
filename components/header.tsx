@@ -29,8 +29,8 @@ const Header = () => {
               alt="Icone de lupa"
             />
           </button>
+          <div className="border"></div>
         </div>
-        <div className="border"></div>
         <div className="buttons">
           <button className="button_theme">
             <Image src={iconTheme} width={16} height={16} alt="Icone de tema" />

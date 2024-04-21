@@ -1,6 +1,7 @@
 import { Header } from "../components/";
 import Head from "next/head";
-import { HomeSection } from "@/sections";
+import { CampaignsSection, HomeSection } from "@/sections";
+
 export default function Home() {
   return (
     <>
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <main>
         <HomeSection />
+        <CampaignsSection />
       </main>
     </>
   );

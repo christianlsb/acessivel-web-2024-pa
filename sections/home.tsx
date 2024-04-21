@@ -14,7 +14,7 @@ const Home = () => {
               identificarmos áreas que necessitam de melhorias e promovermos um
               ambiente mais inclusivo para todos.
             </p>
-            <button>
+            <button className="button_acess">
               Acessar
               <Image
                 src={iconArrowRight}

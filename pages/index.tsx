@@ -7,6 +7,7 @@ export default function Home() {
     <>
       <Head>
         <title>+Acessivel</title>
+        <meta name="description" content="Acessibilidade para todos" />
       </Head>
       <Header />
       <main>

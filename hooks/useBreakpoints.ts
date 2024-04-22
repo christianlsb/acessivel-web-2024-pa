@@ -8,7 +8,7 @@ export default function useBreakpoints(extended = false) {
 
   useEffect(() => {
     const getBreakpoint = () => {
-      if (matchMedia("(max-width: 767px)").matches) setBreakpoint("mobile");
+      if (matchMedia("(max-width: 1023px)").matches) setBreakpoint("mobile");
       else if (matchMedia("(max-width: 1023px)").matches)
         setBreakpoint("tablet");
       else if (extended && matchMedia("(max-width: 1439px)").matches)

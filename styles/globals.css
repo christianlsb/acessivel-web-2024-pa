@@ -215,5 +215,6 @@ header .border {
 
   #form .fields {
     flex-direction: column;
+    gap: 20px;
   }
 }

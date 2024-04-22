@@ -89,7 +89,7 @@ header .border {
 }
 
 #home {
-  padding-top: 20px;
+  padding: 20px 0px;
 }
 #home .content {
   display: flex;
@@ -186,4 +186,34 @@ header .border {
   font-weight: 300;
   font-size: 0.813em;
   padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1023px) {
+  #home .content {
+    flex-direction: column;
+  }
+  #home h1 {
+    max-width: none;
+    line-height: 40px;
+    margin-bottom: 10px;
+  }
+  #home p {
+    max-width: none;
+    line-height: 25px;
+  }
+  #organizations .content {
+    flex-direction: column;
+  }
+  #organizations h2 {
+    max-width: none;
+    line-height: 40px;
+    margin-bottom: 10px;
+  }
+  #form .box {
+    flex-direction: column;
+  }
+
+  #form .fields {
+    flex-direction: column;
+  }
 }

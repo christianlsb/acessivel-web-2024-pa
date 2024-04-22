@@ -188,7 +188,7 @@ const FormSection = () => {
                   />
                 </div>
                 <button className="button_acess">
-                  Acessar
+                  Enviar
                   <Image
                     src={iconArrowRight}
                     width={20}

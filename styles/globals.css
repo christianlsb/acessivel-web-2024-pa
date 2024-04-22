@@ -116,3 +116,74 @@ header .border {
 #campaigns .content {
   height: 370px;
 }
+
+#organizations {
+  margin-top: 20px;
+}
+
+#organizations h2 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333333;
+  line-height: 55px;
+  max-width: 450px;
+}
+
+#organizations .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#organizations .content p {
+  font-size: 1.25em;
+  color: #333333;
+  max-width: 550px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+#form {
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+#form .box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#form .paragraph_box {
+  font-size: 1.25em;
+  color: #333333;
+  max-width: 550px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+#form .fields {
+  display: flex;
+  gap: 50px;
+}
+
+#form h2 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333333;
+  line-height: 55px;
+  text-align: center;
+}
+
+#form h3 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333333;
+  line-height: 55px;
+}
+
+#form .portal {
+  color: #000000;
+  font-weight: 300;
+  font-size: 0.813em;
+  padding-bottom: 20px;
+}

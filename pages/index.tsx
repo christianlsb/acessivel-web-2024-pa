@@ -1,6 +1,11 @@
 import { Header } from "../components/";
 import Head from "next/head";
-import { CampaignsSection, HomeSection } from "@/sections";
+import {
+  CampaignsSection,
+  FormSection,
+  HomeSection,
+  OrganizationsSection,
+} from "@/sections";
 
 export default function Home() {
   return (
@@ -13,6 +18,8 @@ export default function Home() {
       <main>
         <HomeSection />
         <CampaignsSection />
+        <OrganizationsSection />
+        <FormSection />
       </main>
     </>
   );

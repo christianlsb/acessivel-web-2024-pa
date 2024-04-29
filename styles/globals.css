@@ -189,6 +189,17 @@ header .border {
   padding-bottom: 20px;
 }
 
+#form textarea {
+  height: 240px;
+  resize: none;
+  outline: none;
+  padding: 20px;
+}
+
+#form .content_textArea {
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 1023px) {
   #home .content {
     flex-direction: column;

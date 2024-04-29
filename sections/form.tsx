@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -186,6 +187,9 @@ const FormSection = () => {
                       </FormItem>
                     )}
                   />
+                </div>
+                <div className="content_textArea">
+                  <Textarea className="h-[240px]" />
                 </div>
                 <button className="button_acess">
                   Enviar

@@ -6,44 +6,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import sectionImage from "../assets/img/png/section-image-form.png";
 import Image from "next/image";
+import { campaings } from "@/data";
 
 const Campaigns = () => {
-  const dataImg = [
-    {
-      img: sectionImage,
-      title: "Campaign 1",
-      description: "Description 1",
-    },
-    {
-      img: sectionImage,
-      title: "Campaign 2",
-      description: "Description 2",
-    },
-    {
-      img: sectionImage,
-      title: "Campaign 3",
-      description: "Description 3",
-    },
-    {
-      img: sectionImage,
-      title: "Campaign 4",
-      description: "Description 4",
-    },
-    {
-      img: sectionImage,
-      title: "Campaign 5",
-      description: "Description 5",
-    },
-  ];
   return (
     <>
-      <section id="campaigns">
+      <section id="campaigns" className="section_container">
         <div className="grid content">
           <Carousel className="w-full">
             <CarouselContent>
-              {dataImg.map((item, index) => (
+              {campaings.map(({ image, description, title }, index) => (
                 <CarouselItem key={index}>
                   <div className="p-1">
                     <Card className="h-[370px]">
@@ -51,9 +24,16 @@ const Campaigns = () => {
                         style={{
                           height: "370px",
                         }}
-                        className="flex aspect-square items-center justify-center p-6"
+                        className="flex aspect-square items-center justify-center"
                       >
-                        <Image src={item.img} alt="" />
+                        <Image
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                          }}
+                          src={image}
+                          alt={title}
+                        />
                       </CardContent>
                     </Card>
                   </div>

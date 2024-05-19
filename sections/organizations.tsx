@@ -5,7 +5,7 @@ import iconArrowRight from "../assets/icons/icon-arrow-right.png";
 const Organizations = () => {
   return (
     <>
-      <section id="organizations">
+      <section id="organizations" className="section_container">
         <div className="grid content">
           <div className="text">
             <h2>Organizações de Apoio</h2>

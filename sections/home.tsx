@@ -4,7 +4,7 @@ import iconArrowRight from "../assets/icons/icon-arrow-right.png";
 const Home = () => {
   return (
     <>
-      <section id="home">
+      <section id="home" className="section_container">
         <div className="grid content">
           <div className="text">
             <h1>Ajude a sua região a ser mais acessível</h1>

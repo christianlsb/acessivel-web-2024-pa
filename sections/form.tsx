@@ -30,13 +30,11 @@ const FormSection = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
   return (
     <>
-      <section id="form">
+      <section id="form" className="section_container">
         <div className="grid content">
           <h2>Queremos ouvir você!</h2>
           <div className="box">

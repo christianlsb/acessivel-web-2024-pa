@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-.grid {
-  width: 1436px;
+img {
   max-width: 100%;
-  padding: 0 36px;
+  height: auto;
+  display: block;
+}
+
+.section_container {
+  padding: 20px 0px;
+}
+
+.grid {
+  width: 1404px;
+  max-width: 100%;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -89,9 +99,6 @@ header .border {
   opacity: 0.8;
 }
 
-#home {
-  padding: 20px 0px;
-}
 #home .content {
   display: flex;
   justify-content: space-between;
@@ -118,10 +125,6 @@ header .border {
   height: 370px;
 }
 
-#organizations {
-  margin-top: 20px;
-}
-
 #organizations h2 {
   font-size: 2em;
   font-weight: 700;
@@ -145,7 +148,6 @@ header .border {
 
 #form {
   margin-top: 20px;
-  padding-bottom: 20px;
 }
 
 #form .box {

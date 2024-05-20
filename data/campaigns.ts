@@ -1,12 +1,5 @@
 import campaingImage from "@/assets/img/jpg/CAMPANHA-DO-AGASALHO-1-2.jpg";
 
-interface Campaings {
-  image: any;
-  title: string;
-  description: string;
-}
-[];
-
 export const campaings: Campaings[] = [
   {
     image: campaingImage,

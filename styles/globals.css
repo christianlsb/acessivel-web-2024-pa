@@ -146,10 +146,6 @@ header .border {
   font-weight: 400;
 }
 
-#form {
-  margin-top: 20px;
-}
-
 #form .box {
   display: flex;
   align-items: center;
@@ -230,5 +226,9 @@ header .border {
   #form .fields {
     flex-direction: column;
     gap: 20px;
+  }
+
+  .button_acess {
+    width: 100%;
   }
 }

@@ -23,6 +23,9 @@ const Header = () => {
                   <li>
                     <a href="#">Acessibilidade</a>
                   </li>
+                  <li>
+                    <a href="#">Registrar Queixa</a>
+                  </li>
                 </ul>
               </nav>
               {/* <button className="button_search_region">

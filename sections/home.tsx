@@ -1,5 +1,5 @@
 import Image from "next/image";
-import sectionImage from "../assets/img/png/section-image-home.png";
+import sectionImage from "../assets/img/png/desktop/section-image-home.png";
 import iconArrowRight from "../assets/icons/icon-arrow-right.png";
 const Home = () => {
   return (

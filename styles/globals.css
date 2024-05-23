@@ -44,7 +44,13 @@ header .content {
 
 header .content nav ul {
   display: flex;
-  gap: 20px;
+}
+
+header .content nav ul li a {
+  padding: 15px 25px;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease-in-out;
 }
 
 header .button_search_region {
@@ -53,9 +59,9 @@ header .button_search_region {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  gap: 25px;
   font-style: italic;
   cursor: pointer;
+  gap: 40px;
 }
 
 header .mid_box {
@@ -86,9 +92,8 @@ header .button_register {
   gap: 14px;
 }
 
-header .button_login,
-.button_register,
-img {
+header .button_login img,
+.button_register img {
   margin-top: 2px;
 }
 
@@ -198,7 +203,15 @@ header .border {
   margin-top: 20px;
 }
 
-@media screen and (max-width: 1023px) {
+footer {
+  background-color: #2364af;
+}
+
+footer .container_image img {
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
   #home .content {
     flex-direction: column;
   }

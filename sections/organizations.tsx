@@ -1,5 +1,5 @@
 import Image from "next/image";
-import sectionImage from "../assets/img/png/section-image-person.png";
+import sectionImage from "../assets/img/png/desktop/section-image-person.png";
 import iconArrowRight from "../assets/icons/icon-arrow-right.png";
 
 const Organizations = () => {

@@ -7,4 +7,8 @@ interface Campaings {
   title: string;
   description: string;
 }
-[];
+
+interface Footer {
+  title: string;
+  link: string;
+}

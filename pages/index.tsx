@@ -1,6 +1,5 @@
-import { Header } from "../components/";
+import { Footer, Header } from "../components/";
 import Head from "next/head";
-import { Helmet } from "react-helmet";
 import {
   CampaignsSection,
   FormSection,
@@ -25,6 +24,7 @@ export default function Home() {
         <OrganizationsSection />
         <FormSection />
       </main>
+      <Footer />
     </>
   );
 }

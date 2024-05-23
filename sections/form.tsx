@@ -1,5 +1,5 @@
 import Image from "next/image";
-import sectionImage from "../assets/img/png/section-image-form.png";
+import sectionImage from "../assets/img/png/desktop/section-image-form.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

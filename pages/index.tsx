@@ -22,7 +22,7 @@ export default function Home() {
         <HomeSection />
         <CampaignsSection />
         <OrganizationsSection />
-        <FormSection />
+        {/* <FormSection /> */}
       </main>
       <Footer />
     </>

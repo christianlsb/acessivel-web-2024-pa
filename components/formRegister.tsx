@@ -43,12 +43,12 @@ const FormRegister = () => {
               <div className={st.fields}>
                 <div className={st.field}>
                   <label htmlFor="name">Nome</label>
-                  <input type="text" {...register("name")} />
+                  <input id="name" type="text" {...register("name")} />
                   {errors.name && <p>{errors.name.message as string}</p>}
                 </div>
                 <div className={st.field}>
                   <label htmlFor="lastName">Sobrenome</label>
-                  <input type="text" {...register("lastName")} />
+                  <input type="text" id="lastName" {...register("lastName")} />
                   {errors.lastName && (
                     <p>{errors.lastName.message as string}</p>
                   )}
@@ -58,6 +58,7 @@ const FormRegister = () => {
                 <div className={cn(st.field, st.fieldEmail)}>
                   <label htmlFor="email">Email</label>
                   <input
+                    id="email"
                     className={st.email}
                     type="text"
                     {...register("email")}
@@ -68,12 +69,16 @@ const FormRegister = () => {
               <div className={st.fields}>
                 <div className={st.field}>
                   <label htmlFor="cpf">CPF</label>
-                  <input type="text" {...register("cpf")} />
+                  <input id="cpf" type="text" {...register("cpf")} />
                   {errors.cpf && <p>{errors.cpf.message as string}</p>}
                 </div>
                 <div className={st.field}>
                   <label htmlFor="birthDate">Data de nascimento</label>
-                  <input type="text" {...register("birthDate")} />
+                  <input
+                    id="birthDate"
+                    type="text"
+                    {...register("birthDate")}
+                  />
                   {errors.birthDate && (
                     <p>{errors.birthDate.message as string}</p>
                   )}
@@ -82,14 +87,22 @@ const FormRegister = () => {
               <div className={st.fields}>
                 <div className={st.field}>
                   <label htmlFor="password">Senha</label>
-                  <input type="password" {...register("password")} />
+                  <input
+                    id="password"
+                    type="password"
+                    {...register("password")}
+                  />
                   {errors.password && (
                     <p>{errors.password.message as string}</p>
                   )}
                 </div>
                 <div className={st.field}>
                   <label htmlFor="confirmPassword">Confirmar senha</label>
-                  <input type="password" {...register("confirmPassword")} />
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    {...register("confirmPassword")}
+                  />
                   {errors.confirmPassword && (
                     <p>{errors.confirmPassword.message as string}</p>
                   )}

@@ -8,13 +8,13 @@
 }
 
 .container .content {
+    padding: 0 36px;
     display: flex;
-    width: 1478px;
-    max-width: 100%;
     justify-content: space-between;
 }
 
-.container .content img{
+
+.container .content .contentImg img{
     border-radius: 50px;
 }
 

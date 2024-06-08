@@ -12,3 +12,4 @@ interface Footer {
   title: string;
   link: string;
 }
+

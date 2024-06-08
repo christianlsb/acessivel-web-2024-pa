@@ -3,6 +3,7 @@ import logo from "../assets/img/png/desktop/+Acessível.png";
 import iconUser from "../assets/icons/icon-user.png";
 import iconTheme from "../assets/icons/icon-theme.png";
 import useBreakpoints from "../hooks/useBreakpoints";
+import Link from "./link";
 
 const Header = () => {
   const breakpoint = useBreakpoints();
@@ -22,7 +23,6 @@ const Header = () => {
                     <a href="#">Acessibilidade</a>
                   </li>
                   <li>
-                    <a href="#">Registrar Queixa</a>
                   </li>
                 </ul>
               </nav>
@@ -36,7 +36,7 @@ const Header = () => {
                   alt="Icone de tema"
                 />
               </button>
-              <button className="button_register">
+              <Link href={'/register'} className="button_register">
                 <Image
                   src={iconUser}
                   width={14}
@@ -44,8 +44,8 @@ const Header = () => {
                   alt="Icone de usuario"
                 />
                 Cadastrar
-              </button>
-              <button className="button_login">
+              </Link>
+              <Link href={'/login'} className="button_login">
                 <Image
                   src={iconUser}
                   width={14}
@@ -53,7 +53,7 @@ const Header = () => {
                   alt="Icone de usuario"
                 />
                 Entrar
-              </button>
+              </Link>
             </div>
           </>
         ) : (

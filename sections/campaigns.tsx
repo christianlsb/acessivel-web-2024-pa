@@ -27,10 +27,8 @@ const Campaigns = () => {
                         className="flex aspect-square items-center justify-center"
                       >
                         <Image
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                          }}
+                          width={1152}
+                          height={372}
                           src={image}
                           alt={title}
                         />

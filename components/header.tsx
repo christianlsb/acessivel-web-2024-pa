@@ -5,11 +5,11 @@ import iconTheme from "../assets/icons/icon-theme.png";
 import useBreakpoints from "../hooks/useBreakpoints";
 import Link from "./link";
 
-interface Header {
+interface HeaderProps {
   pathname?: string;
 }
 
-const Header = ({ pathname }: Header) => {
+const Header = ({ pathname }: HeaderProps) => {
   const breakpoint = useBreakpoints();
   return (
     <header>

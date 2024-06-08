@@ -3,14 +3,21 @@ import logo from "../assets/img/png/desktop/+Acessível.png";
 import iconUser from "../assets/icons/icon-user.png";
 import iconTheme from "../assets/icons/icon-theme.png";
 import useBreakpoints from "../hooks/useBreakpoints";
+import Link from "./link";
 
-const Header = () => {
+interface Header {
+  pathname?: string;
+}
+
+const Header = ({ pathname }: Header) => {
   const breakpoint = useBreakpoints();
   return (
     <header>
-      <div className="grid content">
-        <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
-        {breakpoint !== "mobile" ? (
+      <div className={pathname === "/" ? "grid content" : "gridAlternative"}>
+        <Link href={"/"}>
+          <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
+        </Link>
+        {pathname === "/" && (
           <>
             <div className="mid_box">
               <nav>
@@ -21,9 +28,7 @@ const Header = () => {
                   <li>
                     <a href="#">Acessibilidade</a>
                   </li>
-                  <li>
-                    <a href="#">Registrar Queixa</a>
-                  </li>
+                  <li></li>
                 </ul>
               </nav>
             </div>
@@ -36,7 +41,7 @@ const Header = () => {
                   alt="Icone de tema"
                 />
               </button>
-              <button className="button_register">
+              <Link href={"/register"} className="button_register">
                 <Image
                   src={iconUser}
                   width={14}
@@ -44,8 +49,8 @@ const Header = () => {
                   alt="Icone de usuario"
                 />
                 Cadastrar
-              </button>
-              <button className="button_login">
+              </Link>
+              <Link href={"/login"} className="button_login">
                 <Image
                   src={iconUser}
                   width={14}
@@ -53,12 +58,8 @@ const Header = () => {
                   alt="Icone de usuario"
                 />
                 Entrar
-              </button>
+              </Link>
             </div>
-          </>
-        ) : (
-          <>
-            <span>Menu hamburguer</span>
           </>
         )}
       </div>

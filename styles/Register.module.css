@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container .content {
+  padding: 0 36px;
+  display: flex;
+  gap: 50px;
+  width: 1549px;
+}
+
+.contentImg img {
+  border-radius: 50px;
+}
+
+.container .content .containerForm {
+  display: flex;
+  align-items: center;
+}
+
+.contentForm {
+  padding: 0 34px;
+}
+
+.contentForm h1 {
+  text-align: center;
+}
+
+.contentForm p {
+  display: block;
+  text-align: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.fields .field {
+  width: 100%;
+}
+.fieldEmail input {
+  width: 100%;
+}
+
+.container .content .fields {
+  display: flex;
+  width: 664px;
+  max-width: 100%;
+  margin-bottom: 20px;
+}

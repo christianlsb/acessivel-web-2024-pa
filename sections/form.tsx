@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import Link from "@/components/link";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -45,15 +46,13 @@ const FormSection = () => {
               alt="Pessoa com contatos"
             />
             <p className="paragraph_box">
-              Ainda não está cadastrado? Tudo certo, vamos começar por suas
-              necessidades. Abaixo, complete o formulário, com seus dados e em
-              seguida envie sua reclamação, sugestão ou dúvida no campo
-              especificado. Ah! Se você quiser nos enviar uma fotografia da
-              situação retratada, é só clicar no símbolo de adicionar.
-              Representado da seguinte forma:
+              Pronto para fazer sua queixa? Primeiro, precisamos que você se
+              cadastre. Após preencher o formulário na próxima página com seus
+              dados, você poderá enviar sua reclamação, sugestão ou dúvida no
+              campo especificado
             </p>
           </div>
-          <div className="content_form">
+          {/* <div className="content_form">
             <h3>Identifique-se</h3>
             <p className="portal">
               O portal que te escuta! Estamos aqui por você.
@@ -200,7 +199,16 @@ const FormSection = () => {
                 </button>
               </form>
             </Form>
-          </div>
+          </div> */}
+          <Link href={"/register"} className="button_acess">
+            Cadastrar
+            <Image
+              src={iconArrowRight}
+              width={20}
+              height={20}
+              alt="Icone de usuario"
+            />
+          </Link>
         </div>
       </section>
     </>

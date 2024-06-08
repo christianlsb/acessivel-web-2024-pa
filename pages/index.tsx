@@ -17,12 +17,12 @@ export default function Home() {
         />
         <meta name="description" content="Acessibilidade para todos" />
       </Head>
-      <Header />
+      <Header pathname="/" />
       <main>
         <HomeSection />
-        <CampaignsSection />
-        <OrganizationsSection />
-        {/* <FormSection /> */}
+        {/* <CampaignsSection />
+        <OrganizationsSection /> */}
+        <FormSection />
       </main>
       <Footer />
     </>

@@ -17,8 +17,10 @@ const config = {
         "2xl": "1400px",
       },
     },
-
     extend: {
+      colors: {
+        primaryBlue: "#2364AF",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

@@ -5,13 +5,19 @@ import iconTheme from "../assets/icons/icon-theme.png";
 import useBreakpoints from "../hooks/useBreakpoints";
 import Link from "./link";
 
-const Header = () => {
+interface Header {
+  pathname?: string;
+}
+
+const Header = ({ pathname }: Header) => {
   const breakpoint = useBreakpoints();
   return (
     <header>
-      <div className="grid content">
-        <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
-        {breakpoint !== "mobile" ? (
+      <div className={pathname === "/" ? "grid content" : "gridAlternative"}>
+        <Link href={"/"}>
+          <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
+        </Link>
+        {pathname === "/" && (
           <>
             <div className="mid_box">
               <nav>
@@ -22,8 +28,7 @@ const Header = () => {
                   <li>
                     <a href="#">Acessibilidade</a>
                   </li>
-                  <li>
-                  </li>
+                  <li></li>
                 </ul>
               </nav>
             </div>
@@ -36,7 +41,7 @@ const Header = () => {
                   alt="Icone de tema"
                 />
               </button>
-              <Link href={'/register'} className="button_register">
+              <Link href={"/register"} className="button_register">
                 <Image
                   src={iconUser}
                   width={14}
@@ -45,7 +50,7 @@ const Header = () => {
                 />
                 Cadastrar
               </Link>
-              <Link href={'/login'} className="button_login">
+              <Link href={"/login"} className="button_login">
                 <Image
                   src={iconUser}
                   width={14}
@@ -55,10 +60,6 @@ const Header = () => {
                 Entrar
               </Link>
             </div>
-          </>
-        ) : (
-          <>
-            <span>Menu hamburguer</span>
           </>
         )}
       </div>

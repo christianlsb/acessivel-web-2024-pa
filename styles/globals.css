@@ -2,14 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-
-input{
+input {
   width: 322px;
   height: 44px;
   border: 1px solid #d3d3d3;
   outline: none;
   border-radius: 24px;
   padding: 0px 10px;
+  font-size: 14px;
+}
+
+.gridAlternative {
+  max-width: 100%;
+  width: 1549px;
+  margin: 60px auto 0px;
+  padding: 0 36px;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333333;
+  line-height: 55px;
+}
+
+p {
+  font-size: 1.25em;
+  color: #333333;
+  line-height: 30px;
+  font-weight: 400;
 }
 
 img {
@@ -31,7 +52,9 @@ img {
 
 .button_acess {
   display: flex;
-  padding: 10px 36px;
+  padding: 10px 0px;
+  width: 161px;
+  max-width: 100%;
   color: #ffffff;
   background-color: #2364af;
   border-radius: 28px;
@@ -86,8 +109,8 @@ header .buttons {
   gap: 20px;
 }
 
-header .button_login,
-header .button_register {
+.button_login,
+.button_register {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,19 +144,11 @@ header .border {
 }
 
 #home h1 {
-  font-size: 2em;
-  font-weight: 700;
-  color: #333333;
-  line-height: 55px;
-  max-width: 450px;
+  max-width: 558px;
 }
 
 #home p {
-  font-size: 1.25em;
-  color: #333333;
   max-width: 550px;
-  line-height: 30px;
-  font-weight: 400;
 }
 
 #campaigns .content {

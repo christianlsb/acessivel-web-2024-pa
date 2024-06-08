@@ -1,10 +1,5 @@
-import st from "@/styles/Register.module.css";
-import Image from "next/image";
-import dog from "@/assets/img/jpg/dog.jpg";
-import cn from "classnames";
 import Head from "next/head";
-import { Button } from "@/components/ui/button";
-import { Header } from "@/components/index";
+import { FormLogin, Header, VectorBlue } from "@/components/index";
 
 export default function Login() {
   return (
@@ -18,6 +13,8 @@ export default function Login() {
         <meta name="description" content="Acessibilidade para todos" />
       </Head>
       <Header />
+      <FormLogin />
+      <VectorBlue className="absolute bottom-0 right-0" />
     </>
   );
 }

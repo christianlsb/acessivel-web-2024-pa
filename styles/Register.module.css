@@ -32,6 +32,13 @@
 
 .contentForm p {
   display: block;
+  font-size: 14px;
+  text-align: center;
+}
+
+.contentForm a {
+  display: block;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -41,8 +48,13 @@
 }
 
 .fields .field {
+  margin: 0 auto;
+}
+
+.fields .fieldEmail {
   width: 100%;
 }
+
 .fieldEmail input {
   width: 100%;
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Link from "./link";
 
 const formSchema = z.object({
   name: z.string().min(3).max(50),
@@ -112,7 +113,9 @@ const FormRegister = () => {
                 Cadastre-se
               </Button>
             </form>
-            <p>Já faz parte? Clique aqui e acesse a sua conta!</p>
+            <Link href={"/login"}>
+              Já faz parte? Clique aqui e acesse a sua conta!
+            </Link>
           </div>
         </div>
       </div>

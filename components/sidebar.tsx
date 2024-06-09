@@ -5,10 +5,9 @@ import Link from "./link";
 
 const Sidebar = () => {
   const router = useRouter();
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeLink, setActiveLink] = useState<string | null>(null);
 
   useEffect(() => {
-    // Atualiza o estado do link ativo sempre que a rota muda
     setActiveLink(router.pathname);
   }, [router.pathname]);
 
@@ -17,6 +16,14 @@ const Sidebar = () => {
       <div className={st.content}>
         <nav>
           <ul>
+            <li>
+              <Link
+                href={"/home"}
+                className={activeLink === "/home" ? st.active : ""}
+              >
+                Principal
+              </Link>
+            </li>
             <li>
               <Link
                 href={"/dashboard"}

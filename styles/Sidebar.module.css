@@ -29,8 +29,8 @@
 }
 
 .active {
-  border-left: 5px solid #0047b6;
-  color: #0047b6;
+  border-left: 5px solid #fabe0c;
+  color: #2364af;
   font-weight: bold;
   transition: 0.3s ease-in-out;
 }

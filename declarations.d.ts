@@ -13,3 +13,7 @@ interface Footer {
   link: string;
 }
 
+interface DashboardLink {
+  title: string;
+  link: string;
+}

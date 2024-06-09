@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Sidebar } from "@/components/index";
+import { CardNavigator, Sidebar } from "@/components/index";
 
 export default function Home() {
   return (
@@ -15,6 +15,7 @@ export default function Home() {
       <div className="container-dashboard">
         <Sidebar />
         <h1>Home</h1>
+        <CardNavigator />
       </div>
     </>
   );

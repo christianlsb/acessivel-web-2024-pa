@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { Sidebar, Header } from "@/components/index";
+import { Sidebar } from "@/components/index";
 
-export default function Solicit() {
+export default function Home() {
   return (
     <>
       <Head>
@@ -14,7 +14,7 @@ export default function Solicit() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Solicitações</h1>
+        <h1>Home</h1>
       </div>
     </>
   );

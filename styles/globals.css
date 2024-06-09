@@ -43,6 +43,10 @@ img {
   padding: 20px 0px;
 }
 
+.container-dashboard {
+  display: flex;
+}
+
 .grid {
   width: 1224px;
   max-width: 100%;

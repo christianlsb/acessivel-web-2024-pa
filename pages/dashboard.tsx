@@ -12,7 +12,10 @@ export default function Dashboard() {
         />
         <meta name="description" content="Acessibilidade para todos" />
       </Head>
-      <Sidebar />
+      <div className="container-dashboard">
+        <Sidebar />
+        <h1>Dashboard</h1>
+      </div>
     </>
   );
 }

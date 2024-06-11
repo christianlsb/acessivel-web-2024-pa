@@ -1,15 +1,16 @@
 /* Sidebar.module.css */
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   height: 100vh;
   background-color: #ececec;
   box-shadow: inset 0px 11px 4px -10px rgba(0, 0, 0, 0);
   max-width: 100%;
   width: 300px;
   height: 100vh;
+}
+
+.content {
+  margin-top: 60px;
 }
 
 .content nav ul li {

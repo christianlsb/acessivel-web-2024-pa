@@ -1,4 +1,5 @@
-.core {
-  width: calc(33.3% - 20px);
-  background-color: aqua;
+.card {
+  width: calc(50% - 10px);
+  background-color: #ececec;
+  height: 200px;
 }

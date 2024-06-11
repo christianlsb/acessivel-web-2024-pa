@@ -4,7 +4,7 @@ import st from "@/styles/NavigatorHome.module.css";
 
 const Navigator = () => {
   return (
-    <ul className={st.core}>
+    <ul className={st.navigator}>
       {dashboardLinks.map(({ link, title }, index) => (
         <CardNavigator key={index} link={link} title={title} />
       ))}

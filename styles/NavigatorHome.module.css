@@ -1,7 +1,6 @@
-.core {
-  width: 720px;
+.navigator {
   display: flex;
-  flex-direction: row;
+  width: 720px;
   flex-wrap: wrap;
   gap: 20px;
   margin: 0 auto;

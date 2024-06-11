@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "./link";
 import st from "@/styles/CardNavigator.module.css";
+
 interface CardNavigatorProps {
   title: string;
   image?: string;
@@ -9,9 +10,8 @@ interface CardNavigatorProps {
 
 const CardNavigator = ({ title, image, link }: CardNavigatorProps) => {
   return (
-    <li className={st.core}>
+    <li className={st.card}>
       <Link href={link}>
-        {/* <Image src /> */}
         <span>{title}</span>
       </Link>
     </li>

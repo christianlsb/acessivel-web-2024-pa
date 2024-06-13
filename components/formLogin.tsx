@@ -8,15 +8,82 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Link from "./link";
 
-const formSchema = z.object({
-  name: z.string().min(3).max(50),
-  lastName: z.string().min(3).max(50),
-  email: z.string().email(),
-  cpf: z.string().length(11),
-  birthDate: z.string(),
-  password: z.string().min(6).max(50),
-  confirmPassword: z.string().min(6).max(50),
-});
+/* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
+const formSchema = z
+  .object({
+    name: z
+      .string()
+      .min(1, "O nome é obrigatório")
+      .max(50, "Inválido, no máximo 50 letras")
+      .regex(
+        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+        "Nome inválido"
+      )
+      .refine((campo) => campo.length >= 3, {
+        message: "Inválido, no mínimo 3 letras",
+      }),
+    lastName: z
+      .string()
+      .min(1, "O sobrenome é obrigatório")
+      .max(50, "Inválido, no máximo 50 letras")
+      .regex(
+        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+        "Nome inválido"
+      )
+      .refine((campo) => campo.length >= 3, {
+        message: "Inválido, no mínimo 3 letras",
+      }),
+    email: z
+      .string()
+      .min(1, "O email é obrigatório")
+      .max(100, "Inválido, no máximo 100 letras")
+      .email() /* verificação de email existente no bd */
+      .refine((campo) => campo.length >= 5, {
+        message: "Inválido, no mínimo 5 letras",
+      }),
+    cpf: z
+      .string()
+      .min(1, "O CPF é obrigatório")
+      .length(
+        11,
+        "O CPF deve conter 11 números"
+      ) /* verificação de cpf existente e se é válido */,
+    birthDate: z
+      .string()
+      .min(1, "A data de nascimento é obrigatória")
+      .date("Inválida, formato YYYY-MM-DD"),
+    password: z
+      .string()
+      .min(1, "A senha é obrigatória")
+      .max(50, "Inválida, no máximo 50 carateres")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
+        "Senha inválida, exemplo de senha: Senha123!"
+      )
+      .refine((campo) => campo.length >= 8, {
+        message: "Inválido, no mínimo 8 caracteres",
+      }),
+    confirmPassword: z
+      .string()
+      .min(1, "A senha é obrigatória")
+      .max(50, "Inválida, no máximo 50 carateres")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
+        "Senha inválida, ex: Senha123!"
+      )
+      .refine((campo) => campo.length >= 8, {
+        message: "Inválido, no mínimo 8 caracteres",
+      }),
+  })
+  .refine(
+    (campos) => {
+      return campos.password == campos.confirmPassword;
+    },
+    {
+      message: "As senhas devem ser iguais!",
+      path: ["confirmPassword"],
+    }
+  );
 
 const FormLogin = () => {
   const {
@@ -41,21 +108,23 @@ const FormLogin = () => {
               <div className={st.fields}>
                 <div className={st.field}>
                   <label htmlFor="name">Nome</label>
+                  <span className={st.fieldValidation}>
+                    {errors?.name ? (errors.name.message as string) : null}
+                  </span>
                   <input id="name" type="text" {...register("name")} />
-                  {errors.name && <p>{errors.name.message as string}</p>}
                 </div>
               </div>
               <div className={st.fields}>
                 <div className={st.field}>
                   <label htmlFor="password">Senha</label>
+                  <span className={st.fieldValidation}>
+                    {errors?.password ? (errors.password.message as string) : null}
+                  </span>
                   <input
                     id="password"
                     type="password"
                     {...register("password")}
                   />
-                  {errors.password && (
-                    <p>{errors.password.message as string}</p>
-                  )}
                 </div>
               </div>
               <Button className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl">

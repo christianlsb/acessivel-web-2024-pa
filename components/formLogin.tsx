@@ -1,91 +1,36 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useRouter } from "next/router";
 import st from "@/styles/Register.module.css";
 import Image from "next/image";
 import dog from "@/assets/img/jpg/dog.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Link from "./link";
+import Cookies from "js-cookie";
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
-const formSchema = z
-  .object({
-    name: z
-      .string()
-      .min(1, "O nome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
-    lastName: z
-      .string()
-      .min(1, "O sobrenome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
-    email: z
-      .string()
-      .min(1, "O email é obrigatório")
-      .max(100, "Inválido, no máximo 100 letras")
-      .email() /* verificação de email existente no bd */
-      .refine((campo) => campo.length >= 5, {
-        message: "Inválido, no mínimo 5 letras",
-      }),
-    cpf: z
-      .string()
-      .min(1, "O CPF é obrigatório")
-      .length(
-        11,
-        "O CPF deve conter 11 números"
-      ) /* verificação de cpf existente e se é válido */,
-    birthDate: z
-      .string()
-      .min(1, "A data de nascimento é obrigatória")
-      .date("Inválida, formato YYYY-MM-DD"),
-    password: z
-      .string()
-      .min(1, "A senha é obrigatória")
-      .max(50, "Inválida, no máximo 50 carateres")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
-        "Senha inválida, exemplo de senha: Senha123!"
-      )
-      .refine((campo) => campo.length >= 8, {
-        message: "Inválido, no mínimo 8 caracteres",
-      }),
-    confirmPassword: z
-      .string()
-      .min(1, "A senha é obrigatória")
-      .max(50, "Inválida, no máximo 50 carateres")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
-        "Senha inválida, ex: Senha123!"
-      )
-      .refine((campo) => campo.length >= 8, {
-        message: "Inválido, no mínimo 8 caracteres",
-      }),
-  })
-  .refine(
-    (campos) => {
-      return campos.password == campos.confirmPassword;
-    },
-    {
-      message: "As senhas devem ser iguais!",
-      path: ["confirmPassword"],
-    }
-  );
+const formSchema = z.object({
+  email: z
+    .string()
+    .min(1, "O email é obrigatório")
+    .max(100, "Inválido, no máximo 100 letras")
+    .email("Email inválido"),
+  senha: z
+    .string()
+    .min(1, "A senha é obrigatória")
+    .max(50, "Inválida, no máximo 50 caracteres")
+    .refine((campo) => campo.length >= 8, {
+      message: "Inválido, no mínimo 8 caracteres",
+    }),
+});
 
 const FormLogin = () => {
+  const router = useRouter();
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -94,9 +39,32 @@ const FormLogin = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: any) {
-    console.log(values);
-  }
+  const onSubmit = async (values: any) => {
+    setError(null);
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+
+      const data = await response.json();
+
+      Cookies.set("token", data.token, { expires: 7 });
+
+      router.push("/home");
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className={st.container}>
       <div className={cn(st.content)}>
@@ -107,28 +75,28 @@ const FormLogin = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={st.fields}>
                 <div className={st.field}>
-                  <label htmlFor="name">Nome</label>
+                  <label htmlFor="email">E-mail</label>
                   <span className={st.fieldValidation}>
-                    {errors?.name ? (errors.name.message as string) : null}
+                    {errors?.email ? (errors.email.message as string) : null}
                   </span>
-                  <input id="name" type="text" {...register("name")} />
+                  <input id="email" type="text" {...register("email")} />
                 </div>
               </div>
               <div className={st.fields}>
                 <div className={st.field}>
-                  <label htmlFor="password">Senha</label>
+                  <label htmlFor="senha">Senha</label>
                   <span className={st.fieldValidation}>
-                    {errors?.password ? (errors.password.message as string) : null}
+                    {errors?.senha ? (errors.senha.message as string) : null}
                   </span>
-                  <input
-                    id="password"
-                    type="password"
-                    {...register("password")}
-                  />
+                  <input id="senha" type="password" {...register("senha")} />
                 </div>
               </div>
-              <Button className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl">
-                Cadastre-se
+              {error && <p className={st.error}>{error}</p>}
+              <Button
+                type="submit"
+                className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
+              >
+                Entrar
               </Button>
             </form>
             <Link href={"/register"}>

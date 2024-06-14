@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { FormLogin, Header, VectorBlue } from "@/components/index";
+import { GetServerSidePropsContext } from "next";
 
 export default function Login() {
   return (
@@ -18,3 +19,23 @@ export default function Login() {
     </>
   );
 }
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const token = req.cookies.token;
+
+  if (token) {
+    return {
+      redirect: {
+        destination: "/home",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+};

@@ -35,3 +35,7 @@
   font-weight: bold;
   transition: 0.3s ease-in-out;
 }
+
+.logout {
+  padding: 13px 15px 13px 10px;
+}

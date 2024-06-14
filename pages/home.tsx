@@ -26,7 +26,7 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { req } = context;
-  const token = req.cookies.token; // Supondo que você armazena o token em cookies
+  const token = req.cookies.token;
 
   if (!token) {
     return {

@@ -37,7 +37,7 @@ const formSchema = z
       .string()
       .min(1, "O email é obrigatório")
       .max(100, "Inválido, no máximo 100 letras")
-      .email() /* verificação de email existente no bd */
+      .email("Email inválido") /* verificação de email existente no bd */
       .refine((campo) => campo.length >= 5, {
         message: "Inválido, no mínimo 5 letras",
       }),
@@ -58,7 +58,7 @@ const formSchema = z
       .max(50, "Inválida, no máximo 50 carateres")
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
-        "Senha inválida, exemplo de senha: Senha123!"
+        "Senha inválida, ex: Senha123!"
       )
       .refine((campo) => campo.length >= 8, {
         message: "Inválido, no mínimo 8 caracteres",

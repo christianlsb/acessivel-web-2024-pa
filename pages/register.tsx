@@ -14,7 +14,7 @@ export default function Register() {
       </Head>
       <Header />
       <FormRegister />
-      <VectorBlue className="absolute bottom-0 left-0" />
+      {/* <VectorBlue className="absolute bottom-0 left-0" /> */}
     </>
   );
 }

@@ -14,7 +14,7 @@ export default function Login() {
       </Head>
       <Header />
       <FormLogin />
-      <VectorBlue className="absolute bottom-0 right-0" />
+      {/* <VectorBlue className="absolute bottom-0 right-0" /> */}
     </>
   );
 }

@@ -1,17 +1,19 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useRouter } from "next/router";
 import st from "@/styles/Register.module.css";
 import Image from "next/image";
 import dog from "@/assets/img/jpg/dog.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Link from "./link";
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z
   .object({
-    name: z
+    nome: z
       .string()
       .min(1, "O nome é obrigatório")
       .max(50, "Inválido, no máximo 50 letras")
@@ -22,7 +24,7 @@ const formSchema = z
       .refine((campo) => campo.length >= 3, {
         message: "Inválido, no mínimo 3 letras",
       }),
-    lastName: z
+    sobrenome: z
       .string()
       .min(1, "O sobrenome é obrigatório")
       .max(50, "Inválido, no máximo 50 letras")
@@ -48,11 +50,11 @@ const formSchema = z
         11,
         "O CPF deve conter 11 números"
       ) /* verificação de cpf existente e se é válido */,
-    birthDate: z
+    data_nascimento: z
       .string()
       .min(1, "A data de nascimento é obrigatória")
-      .date("Inválida, formato YYYY-MM-DD"),
-    password: z
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Inválida, formato YYYY-MM-DD"),
+    senha: z
       .string()
       .min(1, "A senha é obrigatória")
       .max(50, "Inválida, no máximo 50 carateres")
@@ -75,17 +77,15 @@ const formSchema = z
         message: "Inválido, no mínimo 8 caracteres",
       }),
   })
-  .refine(
-    (campos) => {
-      return campos.password == campos.confirmPassword;
-    },
-    {
-      message: "As senhas devem ser iguais!",
-      path: ["confirmPassword"],
-    }
-  );
+  .refine((campos) => campos.senha === campos.confirmPassword, {
+    message: "As senhas devem ser iguais!",
+    path: ["confirmPassword"],
+  });
 
 const FormRegister = () => {
+  const router = useRouter();
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -94,9 +94,27 @@ const FormRegister = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: any) {
-    console.log(values);
-  }
+  const onSubmit = async (values: any) => {
+    setError(null);
+    try {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+
+      router.push("/login");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <div className={st.container}>
@@ -105,7 +123,6 @@ const FormRegister = () => {
         <div className={st.contentImg}>
           <Image src={dog} width={692} height={610} alt="Imagem do cachorro" />
         </div>
-
         {/* Formulário de Cadastro */}
         <div className={st.containerForm}>
           <div className={st.contentForm}>
@@ -116,19 +133,25 @@ const FormRegister = () => {
               <div className={st.fields}>
                 {/* Nome */}
                 <div className={st.field}>
-                  <label htmlFor="name">Nome</label>
+                  <label htmlFor="nome">Nome</label>
                   <span className={st.fieldValidation}>
-                    {errors?.name ? (errors.name.message as string) : null}
+                    {errors?.nome ? (errors.nome.message as string) : null}
                   </span>
-                  <input id="name" type="text" {...register("name")} />
+                  <input id="nome" type="text" {...register("nome")} />
                 </div>
                 {/* Sobrenome */}
                 <div className={st.field}>
-                  <label htmlFor="lastName">Sobrenome</label>
+                  <label htmlFor="sobrenome">Sobrenome</label>
                   <span className={st.fieldValidation}>
-                    {errors?.lastName ? (errors.lastName.message as string) : null}
+                    {errors?.sobrenome
+                      ? (errors.sobrenome.message as string)
+                      : null}
                   </span>
-                  <input type="text" id="lastName" {...register("lastName")} />
+                  <input
+                    type="text"
+                    id="sobrenome"
+                    {...register("sobrenome")}
+                  />
                 </div>
               </div>
               <div className={st.fields}>
@@ -157,35 +180,35 @@ const FormRegister = () => {
                 </div>
                 {/* Data Nascimento */}
                 <div className={st.field}>
-                  <label htmlFor="birthDate">Data de nascimento</label>
+                  <label htmlFor="data_nascimento">Data de nascimento</label>
                   <span className={st.fieldValidation}>
-                    {errors?.birthDate ? (errors.birthDate.message as string) : null}
+                    {errors?.data_nascimento
+                      ? (errors.data_nascimento.message as string)
+                      : null}
                   </span>
                   <input
-                    id="birthDate"
+                    id="data_nascimento"
                     type="text"
-                    {...register("birthDate")}
+                    {...register("data_nascimento")}
                   />
                 </div>
               </div>
               <div className={st.fields}>
                 {/* Senha */}
                 <div className={st.field}>
-                  <label htmlFor="password">Senha</label>
+                  <label htmlFor="senha">Senha</label>
                   <span className={st.fieldValidation}>
-                    {errors?.password ? (errors.password.message as string) : null}
+                    {errors?.senha ? (errors.senha.message as string) : null}
                   </span>
-                  <input
-                    id="password"
-                    type="password"
-                    {...register("password")}
-                  />
+                  <input id="senha" type="password" {...register("senha")} />
                 </div>
                 {/* Confirmar Senha */}
                 <div className={st.field}>
                   <label htmlFor="confirmPassword">Confirmar senha</label>
                   <span className={st.fieldValidation}>
-                    {errors?.confirmPassword ? (errors.confirmPassword.message as string) : null}
+                    {errors?.confirmPassword
+                      ? (errors.confirmPassword.message as string)
+                      : null}
                   </span>
                   <input
                     id="confirmPassword"
@@ -198,6 +221,7 @@ const FormRegister = () => {
                 Cadastre-se
               </Button>
             </form>
+            {error && <p className={st.error}>{error}</p>}
             <Link href={"/login"}>
               Já faz parte? Clique aqui e acesse a sua conta!
             </Link>

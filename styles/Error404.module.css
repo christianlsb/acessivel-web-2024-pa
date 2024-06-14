@@ -6,4 +6,5 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 2em;
+  padding: 0 16px;
 }

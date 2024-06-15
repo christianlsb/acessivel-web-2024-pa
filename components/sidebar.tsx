@@ -23,9 +23,9 @@ const Sidebar = () => {
     <div className={st.container}>
       <div className={st.content}>
         <nav>
-          <ul>
+          <ul className={st.list}>
             {dashboardLinks.map(({ link, title }, index) => (
-              <li key={index}>
+              <li key={index} className={activeLink === link ? st.active : ""}>
                 <Link
                   href={link}
                   className={activeLink === link ? st.active : ""}

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Sidebar, Header } from "@/components/index";
+import { Sidebar, Header, ContainerDashboard } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 
@@ -16,7 +16,9 @@ export default function Solicit() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Solicitações</h1>
+        <ContainerDashboard>
+          <h1>Solicitações</h1>
+        </ContainerDashboard>
       </div>
     </>
   );

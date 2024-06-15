@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Sidebar, Navigator } from "@/components/index";
+import { Sidebar, Navigator, ContainerDashboard } from "@/components/index";
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 
@@ -16,7 +16,9 @@ export default function Home() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <Navigator />
+        <ContainerDashboard>
+          <Navigator />
+        </ContainerDashboard>
       </div>
     </>
   );

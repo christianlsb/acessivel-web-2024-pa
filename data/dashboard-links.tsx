@@ -3,10 +3,10 @@ export const dashboardLinks: DashboardLink[] = [
     title: "Principal",
     link: "/home",
   },
-  {
-    title: "Dashboard",
-    link: "/dashboard",
-  },
+  // {
+  //   title: "Dashboard",
+  //   link: "/dashboard",
+  // },
   {
     title: "Solicitações",
     link: "/solicitacoes",

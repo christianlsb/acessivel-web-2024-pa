@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Sidebar } from "@/components/index";
+import { ContainerDashboard, Sidebar } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 
@@ -16,7 +16,9 @@ export default function Profile() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Perfil do Usuário</h1>
+        <ContainerDashboard>
+          <h1>Perfil do Usuário</h1>
+        </ContainerDashboard>
       </div>
     </>
   );

@@ -6,3 +6,4 @@ export { default as FormLogin } from "./formLogin";
 export { default as Sidebar } from "./sidebar";
 export { default as CardNavigator } from "./cardNavigator";
 export { default as Navigator } from "./navigatorHome";
+export { default as ContainerDashboard } from "./containerDashboard";

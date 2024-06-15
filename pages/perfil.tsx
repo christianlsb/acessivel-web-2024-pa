@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { Sidebar, Header } from "@/components/index";
+import { Sidebar } from "@/components/index";
+import { GetServerSidePropsContext } from "next";
+import jwt from "jsonwebtoken";
 
 export default function Profile() {
   return (
@@ -19,3 +21,33 @@ export default function Profile() {
     </>
   );
 }
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET ?? "");
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};

@@ -1,0 +1,8 @@
+.navigator {
+  display: flex;
+  width: 720px;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 120px 0px;
+}

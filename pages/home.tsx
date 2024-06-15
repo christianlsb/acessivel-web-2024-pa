@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { CardNavigator, Sidebar } from "@/components/index";
+import { Sidebar, Navigator } from "@/components/index";
+import jwt from "jsonwebtoken";
+import { GetServerSidePropsContext } from "next";
 
 export default function Home() {
   return (
@@ -14,9 +16,38 @@ export default function Home() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Home</h1>
-        <CardNavigator />
+        <Navigator />
       </div>
     </>
   );
 }
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET ?? "");
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};

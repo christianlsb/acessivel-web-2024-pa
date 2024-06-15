@@ -67,3 +67,10 @@
   max-width: 100%;
   margin-bottom: 20px;
 }
+
+.fieldValidation{
+  min-height: 24px;
+  margin: 0;
+  padding: 0;
+  color: #FA0F00;
+}

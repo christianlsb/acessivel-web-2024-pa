@@ -3,10 +3,17 @@ import { useState, useEffect } from "react";
 import st from "@/styles/Sidebar.module.css";
 import Link from "./link";
 import { dashboardLinks } from "@/data";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState<string | null>(null);
+
+  const logout = () => {
+    Cookies.remove("token");
+
+    router.push("/login");
+  };
 
   useEffect(() => {
     setActiveLink(router.pathname);
@@ -16,9 +23,9 @@ const Sidebar = () => {
     <div className={st.container}>
       <div className={st.content}>
         <nav>
-          <ul>
+          <ul className={st.list}>
             {dashboardLinks.map(({ link, title }, index) => (
-              <li key={index}>
+              <li key={index} className={activeLink === link ? st.active : ""}>
                 <Link
                   href={link}
                   className={activeLink === link ? st.active : ""}
@@ -29,6 +36,9 @@ const Sidebar = () => {
             ))}
           </ul>
         </nav>
+        <button onClick={logout} className={st.logout}>
+          Sair
+        </button>
       </div>
     </div>
   );

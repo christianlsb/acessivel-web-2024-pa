@@ -10,6 +10,7 @@ import cn from "classnames";
 import { Button } from "@/components/ui/button";
 import Link from "./link";
 import Cookies from "js-cookie";
+import { useToast } from "@/components/ui/use-toast";
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z.object({
@@ -30,7 +31,8 @@ const formSchema = z.object({
 const FormLogin = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -41,6 +43,7 @@ const FormLogin = () => {
 
   const onSubmit = async (values: any) => {
     setError(null);
+    setLoading(true);
     try {
       const response = await fetch("/api/auth", {
         method: "POST",
@@ -52,14 +55,26 @@ const FormLogin = () => {
 
       if (!response.ok) {
         const { error } = await response.json();
+        setLoading(false);
+        toast({
+          title: "Erro",
+          description: "Usuário ou senha inválidos",
+          variant: "destructive",
+        });
         throw new Error(error);
       }
 
       const data = await response.json();
 
       Cookies.set("token", data.token, { expires: 7 });
-
-      router.push("/home");
+      toast({
+        title: "Sucesso",
+        description: "Login efetuado com sucesso!",
+        variant: "sucess",
+      });
+      setTimeout(() => {
+        router.push("/home");
+      }, 1000);
     } catch (error: any) {
       setError(error.message);
     }
@@ -93,10 +108,11 @@ const FormLogin = () => {
               </div>
               {error && <p className={st.error}>{error}</p>}
               <Button
+                disabled={loading}
                 type="submit"
                 className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
               >
-                Entrar
+                {loading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
             <Link href={"/register"}>

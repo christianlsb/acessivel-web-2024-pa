@@ -9,6 +9,7 @@ import dog from "@/assets/img/jpg/dog.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
 import Link from "./link";
+import { useToast } from "@/components/ui/use-toast";
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z
@@ -83,9 +84,10 @@ const formSchema = z
   });
 
 const FormRegister = () => {
+  const { toast } = useToast();
   const router = useRouter();
-  const [error, setError] = useState(null);
-
+  const [error, setError] = useState<null>();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -96,6 +98,7 @@ const FormRegister = () => {
 
   const onSubmit = async (values: any) => {
     setError(null);
+    setLoading(true);
     try {
       const response = await fetch("/api/user", {
         method: "POST",
@@ -107,12 +110,24 @@ const FormRegister = () => {
 
       if (!response.ok) {
         const { error } = await response.json();
+        toast({
+          title: "Erro ao criar conta",
+          description: error,
+          variant: "destructive",
+        });
+        setLoading(false);
         throw new Error(error);
       }
-
-      router.push("/login");
-    } catch (err) {
-      setError(err.message);
+      toast({
+        title: "Sua conta foi criada com sucesso!",
+        description: "Use suas credenciais para acessar o portal.",
+        variant: "sucess",
+      });
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -217,8 +232,11 @@ const FormRegister = () => {
                   />
                 </div>
               </div>
-              <Button className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl">
-                Cadastre-se
+              <Button
+                disabled={loading}
+                className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
+              >
+                {loading ? "Carregando..." : "Cadastrar"}
               </Button>
             </form>
             {error && <p className={st.error}>{error}</p>}

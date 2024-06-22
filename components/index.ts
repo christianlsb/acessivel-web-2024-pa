@@ -7,3 +7,4 @@ export { default as Sidebar } from "./sidebar";
 export { default as CardNavigator } from "./cardNavigator";
 export { default as Navigator } from "./navigatorHome";
 export { default as ContainerDashboard } from "./containerDashboard";
+export { default as Tabs } from "./tabs";

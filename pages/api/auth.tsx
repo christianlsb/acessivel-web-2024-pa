@@ -30,13 +30,7 @@ export default async function handler(
         return res.status(400).json({ error: "E-mail ou senha inválidos" });
       }
 
-      const token = jwt.sign(
-        { userId: user.id },
-        process.env.JWT_SECRET ?? "",
-        {
-          expiresIn: "1h",
-        }
-      );
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET ?? "");
 
       return res.status(200).json({ token });
     } catch (error) {

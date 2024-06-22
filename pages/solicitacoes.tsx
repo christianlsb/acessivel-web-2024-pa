@@ -16,9 +16,7 @@ export default function Solicit() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <ContainerDashboard title="Solicitações">
-          <Tabs />
-        </ContainerDashboard>
+        <ContainerDashboard title="Solicitações">asdh</ContainerDashboard>
       </div>
     </>
   );

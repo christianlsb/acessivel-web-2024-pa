@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <section id="home" className="section_container">
-        <div className="grid content">
+        <div className="gridProject content">
           <div className="text">
             <h1>Ajude a sua região a ser mais acessível</h1>
             <p>

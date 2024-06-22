@@ -6,7 +6,7 @@ const Organizations = () => {
   return (
     <>
       <section id="organizations" className="section_container">
-        <div className="grid content">
+        <div className="gridProject content">
           <div className="text">
             <h2>Organizações de Apoio</h2>
             <p>

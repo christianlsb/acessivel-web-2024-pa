@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer>
-      <div className="grid"></div>
+      <div className="gridProject"></div>
     </footer>
   );
 };

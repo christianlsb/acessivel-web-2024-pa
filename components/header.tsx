@@ -13,7 +13,9 @@ const Header = ({ pathname }: HeaderProps) => {
   const breakpoint = useBreakpoints();
   return (
     <header>
-      <div className={pathname === "/" ? "grid content" : "gridAlternative"}>
+      <div
+        className={pathname === "/" ? "gridProject content" : "gridAlternative"}
+      >
         <Link href={"/"}>
           <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
         </Link>

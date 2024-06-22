@@ -1,6 +1,16 @@
 import { useState } from "react";
+import st from "@/styles/Tabs.module.css";
 
-const Tabs = () => {
+type Tab = {
+  title?: string | JSX.Element;
+  content?: JSX.Element;
+};
+
+type TabsProps = {
+  tabs: Tab[];
+};
+
+const Tabs = ({ tabs }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index: number) => {
@@ -8,34 +18,22 @@ const Tabs = () => {
   };
 
   return (
-    <div>
-      <h1>Tabs</h1>
-      <ul>
-        <li
-          className={activeTab === 0 ? "active" : ""}
-          onClick={() => handleTabClick(0)}
-        >
-          Tab 1
-        </li>
-        <li
-          className={activeTab === 1 ? "active" : ""}
-          onClick={() => handleTabClick(1)}
-        >
-          Tab 2
-        </li>
-        <li
-          className={activeTab === 2 ? "active" : ""}
-          onClick={() => handleTabClick(2)}
-        >
-          Tab 3
-        </li>
-      </ul>
-      <div>
-        {activeTab === 0 && <p>Content for Tab 1</p>}
-        {activeTab === 1 && <p>Content for Tab 2</p>}
-        {activeTab === 2 && <p>Content for Tab 3</p>}
+    <>
+      <div className={st.container}>
+        <ul>
+          {tabs.map((tab, index) => (
+            <li
+              key={index}
+              className={activeTab === index ? "active" : ""}
+              onClick={() => handleTabClick(index)}
+            >
+              {tab.title}
+            </li>
+          ))}
+        </ul>
+        <div className={st.contentTab}>{tabs[activeTab].content}</div>
       </div>
-    </div>
+    </>
   );
 };
 

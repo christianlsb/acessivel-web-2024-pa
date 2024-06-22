@@ -13,7 +13,7 @@ const Campaigns = () => {
   return (
     <>
       <section id="campaigns" className="section_container">
-        <div className="grid content">
+        <div className="gridProject content">
           <Carousel className="w-full">
             <CarouselContent>
               {campaings.map(({ image, description, title }, index) => (

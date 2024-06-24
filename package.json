@@ -39,6 +39,7 @@
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.51.3",
+    "react-input-mask": "^3.0.0-alpha.2",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",

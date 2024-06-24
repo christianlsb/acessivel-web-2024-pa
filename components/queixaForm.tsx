@@ -38,6 +38,7 @@ const QueixaForm = () => {
           <input id="email" className="h-[112px]" type="text" />
         </div>
       </div>
+      <Button>Enviar queixa</Button>
     </form>
   );
 };

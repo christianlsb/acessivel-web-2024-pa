@@ -10,6 +10,9 @@ import cn from "classnames";
 import { Button } from "@/components/ui/button";
 import Link from "./link";
 import { useToast } from "@/components/ui/use-toast";
+// @ts-ignore-next-line
+import InputMask from "react-input-mask";
+
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z
@@ -40,21 +43,15 @@ const formSchema = z
       .string()
       .min(1, "O email é obrigatório")
       .max(100, "Inválido, no máximo 100 letras")
-      .email("Email inválido") /* verificação de email existente no bd */
+      .email("Email inválido")
       .refine((campo) => campo.length >= 5, {
         message: "Inválido, no mínimo 5 letras",
       }),
     cpf: z
       .string()
       .min(1, "O CPF é obrigatório")
-      .length(
-        11,
-        "O CPF deve conter 11 números"
-      ) /* verificação de cpf existente e se é válido */,
-    data_nascimento: z
-      .string()
-      .min(1, "A data de nascimento é obrigatória")
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Inválida, formato YYYY-MM-DD"),
+      .length(14, "O CPF deve conter 11 números"),
+    data_nascimento: z.string().min(1, "A data de nascimento é obrigatória"),
     senha: z
       .string()
       .min(1, "A senha é obrigatória")
@@ -91,21 +88,33 @@ const FormRegister = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formSchema),
   });
 
+  const formatDateString = (dateStr) => {
+    const [day, month, year] = dateStr.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
   const onSubmit = async (values: any) => {
     setError(null);
     setLoading(true);
+
+    const formattedValues = {
+      ...values,
+      data_nascimento: formatDateString(values.data_nascimento),
+    };
+
     try {
       const response = await fetch("/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(formattedValues),
       });
 
       if (!response.ok) {
@@ -185,15 +194,20 @@ const FormRegister = () => {
                 </div>
               </div>
               <div className={st.fields}>
-                {/* CPF */}
                 <div className={st.field}>
                   <label htmlFor="cpf">CPF</label>
                   <span className={st.fieldValidation}>
                     {errors?.cpf ? (errors.cpf.message as string) : null}
                   </span>
-                  <input id="cpf" type="text" {...register("cpf")} />
+                  <InputMask
+                    mask={"999.999.999-99"}
+                    alwaysShowMask={false}
+                    maskPlaceholder=""
+                    id="cpf"
+                    type="text"
+                    {...register("cpf")}
+                  />
                 </div>
-                {/* Data Nascimento */}
                 <div className={st.field}>
                   <label htmlFor="data_nascimento">Data de nascimento</label>
                   <span className={st.fieldValidation}>
@@ -201,7 +215,8 @@ const FormRegister = () => {
                       ? (errors.data_nascimento.message as string)
                       : null}
                   </span>
-                  <input
+                  <InputMask
+                    mask={"99/99/9999"}
                     id="data_nascimento"
                     type="text"
                     {...register("data_nascimento")}

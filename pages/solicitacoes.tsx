@@ -1,9 +1,27 @@
 import Head from "next/head";
-import { Sidebar, Tabs, ContainerDashboard } from "@/components/index";
+import {
+  Sidebar,
+  Tabs,
+  ContainerDashboard,
+  ProfileForm,
+  AddressForm,
+  QueixaForm,
+} from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 
 export default function Solicit() {
+  const tabs = [
+    {
+      title: "Cadastrar queixa",
+      content: <QueixaForm />,
+    },
+    {
+      title: "Cadastrar necessidade",
+      content: <AddressForm />,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -16,7 +34,9 @@ export default function Solicit() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <ContainerDashboard title="Solicitações">asdh</ContainerDashboard>
+        <ContainerDashboard title="Solicitações">
+          <Tabs tabs={tabs} />
+        </ContainerDashboard>
       </div>
     </>
   );

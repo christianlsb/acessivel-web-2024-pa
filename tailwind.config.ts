@@ -20,6 +20,7 @@ const config = {
     extend: {
       colors: {
         primaryBlue: "#2364AF",
+        formContainer: "#ECECEC",
       },
       keyframes: {
         "accordion-down": {

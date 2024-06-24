@@ -10,3 +10,4 @@ export { default as ContainerDashboard } from "./containerDashboard";
 export { default as Tabs } from "./tabs";
 export { default as AddressForm } from "./addressForm";
 export { default as ProfileForm } from "./profileForm";
+export { default as QueixaForm } from "./queixaForm";

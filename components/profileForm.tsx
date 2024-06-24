@@ -7,8 +7,8 @@ const ProfileForm = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <form>
-      <div className={st.fields}>
+    <form className="p-10 bg-formContainer">
+      <div className="flex gap-5">
         {/* Nome */}
         <div className={st.field}>
           <label htmlFor="nome">Nome</label>
@@ -30,7 +30,7 @@ const ProfileForm = () => {
           <input id="email" className={st.email} type="text" />
         </div>
       </div>
-      <div className={st.fields}>
+      <div className="flex gap-5">
         {/* CPF */}
         <div className={st.field}>
           <label htmlFor="cpf">CPF</label>
@@ -44,7 +44,7 @@ const ProfileForm = () => {
           <input id="data_nascimento" type="text" />
         </div>
       </div>
-      <div className={st.fields}>
+      <div className="flex gap-5">
         {/* Senha */}
         <div className={st.field}>
           <label htmlFor="senha">Senha</label>
@@ -58,12 +58,6 @@ const ProfileForm = () => {
           <input id="confirmPassword" type="password" />
         </div>
       </div>
-      <Button
-        disabled={loading}
-        className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
-      >
-        {loading ? "Carregando..." : "Cadastrar"}
-      </Button>
     </form>
   );
 };

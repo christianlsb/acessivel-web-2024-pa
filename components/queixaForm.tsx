@@ -6,6 +6,32 @@ import cn from "classnames";
 const QueixaForm = () => {
   const [loading, setLoading] = useState(false);
 
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        const form = e.currentTarget;
+        const data = new FormData(form);
+
+        try {
+        const response = await fetch("/api/queixas", {
+            method: "POST",
+            body: data,
+        });
+
+        if (response.ok) {
+            alert("Queixa enviada com sucesso!");
+            form.reset();
+        } else {
+            alert("Erro ao enviar queixa");
+        }
+        } catch (error) {
+        alert("Erro ao enviar queixa");
+        } finally {
+        setLoading(false);
+        }
+    };
+
   return (
     <form className="p-10 bg-formContainer">
       <div className="flex gap-5">

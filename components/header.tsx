@@ -43,7 +43,7 @@ const Header = ({ pathname }: HeaderProps) => {
                   alt="Icone de tema"
                 />
               </button>
-              <Link href={"/register"} className="button_register">
+              <Link href={"/queixante-cadastro"} className="button_register">
                 <Image
                   src={iconUser}
                   width={14}

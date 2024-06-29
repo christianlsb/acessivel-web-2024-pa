@@ -2,7 +2,7 @@ import st from "@/styles/Register.module.css";
 import { useState, useRef } from "react";
 import cn from "classnames";
 
-const QueixaForm = () => {
+const NecessidadeForm = () => {
     const [loading, setLoading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -110,4 +110,4 @@ const QueixaForm = () => {
     );
 };
 
-export default QueixaForm;
+export default NecessidadeForm;

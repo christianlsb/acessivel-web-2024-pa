@@ -11,6 +11,7 @@
   display: flex;
   gap: 50px;
   width: 1549px;
+  align-items: center;
 }
 
 .contentImg img {
@@ -68,9 +69,9 @@
   margin-bottom: 20px;
 }
 
-.fieldValidation{
+.fieldValidation {
   min-height: 24px;
   margin: 0;
   padding: 0;
-  color: #FA0F00;
+  color: #fa0f00;
 }

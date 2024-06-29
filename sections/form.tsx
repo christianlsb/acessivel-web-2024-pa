@@ -200,7 +200,7 @@ const FormSection = () => {
               </form>
             </Form>
           </div> */}
-          <Link href={"/register"} className="button_acess">
+          <Link href={"/queixante-cadastro"} className="button_acess">
             Cadastrar
             <Image
               src={iconArrowRight}

@@ -12,7 +12,7 @@ import Link from "./link";
 import { useToast } from "@/components/ui/use-toast";
 // @ts-ignore-next-line
 import InputMask from "react-input-mask";
-
+import { validate } from 'gerador-validador-cpf';
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z
@@ -48,10 +48,13 @@ const formSchema = z
         message: "Inválido, no mínimo 5 letras",
       }),
     cpf: z
-      .string()
-      .min(1, "O CPF é obrigatório")
-      .length(14, "O CPF deve conter 11 números"),
-    data_nascimento: z.string().min(1, "A data de nascimento é obrigatória"),
+        .string()
+        .min(1, "O CPF é obrigatório")
+        .length(14, "O CPF deve conter 11 números")
+        .refine((cpf) => {
+          const isValid = validate(cpf.replace(/[^\d]/g, ''));
+          return isValid;
+        }, "CPF inválido"),
     senha: z
       .string()
       .min(1, "A senha é obrigatória")
@@ -80,7 +83,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-const FormRegister = () => {
+const FormQueixante = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [error, setError] = useState<null>();
@@ -94,10 +97,11 @@ const FormRegister = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const formatDateString = (dateStr) => {
+  const formatDateString = (dateStr: string) => {
     const [day, month, year] = dateStr.split("/");
     return `${year}-${month}-${day}`;
   };
+
 
   const onSubmit = async (values: any) => {
     setError(null);
@@ -105,11 +109,11 @@ const FormRegister = () => {
 
     const formattedValues = {
       ...values,
-      data_nascimento: formatDateString(values.data_nascimento),
+      dataNascimento: formatDateString(values.dataNascimento),
     };
 
     try {
-      const response = await fetch("/api/user", {
+      const response = await fetch("http://localhost:2424/queixante/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -209,17 +213,17 @@ const FormRegister = () => {
                   />
                 </div>
                 <div className={st.field}>
-                  <label htmlFor="data_nascimento">Data de nascimento</label>
+                  <label htmlFor="dataNascimento">Data de nascimento</label>
                   <span className={st.fieldValidation}>
-                    {errors?.data_nascimento
-                      ? (errors.data_nascimento.message as string)
+                    {errors?.dataNascimento
+                      ? (errors.dataNascimento.message as string)
                       : null}
                   </span>
                   <InputMask
                     mask={"99/99/9999"}
-                    id="data_nascimento"
+                    id="dataNascimento"
                     type="text"
-                    {...register("data_nascimento")}
+                    {...register("dataNascimento")}
                   />
                 </div>
               </div>
@@ -265,4 +269,4 @@ const FormRegister = () => {
   );
 };
 
-export default FormRegister;
+export default FormQueixante;

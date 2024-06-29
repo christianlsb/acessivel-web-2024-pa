@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FormRegister, Header, VectorBlue } from "../components/";
+import { FormQueixante, Header } from "../components/index";
 import { GetServerSidePropsContext } from "next";
 
 export default function Register() {
@@ -14,8 +14,7 @@ export default function Register() {
         <meta name="description" content="Acessibilidade para todos" />
       </Head>
       <Header />
-      <FormRegister />
-      {/* <VectorBlue className="absolute bottom-0 left-0" /> */}
+      <FormQueixante />
     </>
   );
 }

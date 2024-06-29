@@ -12,6 +12,13 @@ input {
   font-size: 14px;
 }
 
+textarea{
+  padding: 5px 10px;
+  border: 1px solid #d3d3d3;
+  outline: none;
+  border-radius: 8px;
+}
+
 .gridAlternative {
   max-width: 100%;
   width: 1549px;

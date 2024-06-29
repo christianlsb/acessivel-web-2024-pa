@@ -1,8 +1,8 @@
 export { default as Header } from "./header";
 export { default as Footer } from "./footer";
 export { default as VectorBlue } from "./vector";
-export { default as FormRegister } from "./formRegister";
-export { default as FormLogin } from "./formLogin";
+export { default as FormQueixante } from "./formQueixante";
+export { default as FormLogin } from "./queixanteLogin";
 export { default as Sidebar } from "./sidebar";
 export { default as CardNavigator } from "./cardNavigator";
 export { default as Navigator } from "./navigatorHome";
@@ -11,3 +11,5 @@ export { default as Tabs } from "./tabs";
 export { default as AddressForm } from "./addressForm";
 export { default as ProfileForm } from "./profileForm";
 export { default as QueixaForm } from "./queixaForm";
+export { default as FormGoverno } from "./formGoverno";
+export { default as GovernoLogin } from "./governoLogin"

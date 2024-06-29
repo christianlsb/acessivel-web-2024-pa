@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-const FormLogin = () => {
+const QueixanteLogin = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -115,7 +115,7 @@ const FormLogin = () => {
                 {loading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
-            <Link href={"/register"}>
+            <Link href={"/queixante-cadastro"}>
               Já faz parte? Clique aqui e acesse a sua conta!
             </Link>
           </div>
@@ -128,4 +128,4 @@ const FormLogin = () => {
   );
 };
 
-export default FormLogin;
+export default QueixanteLogin;

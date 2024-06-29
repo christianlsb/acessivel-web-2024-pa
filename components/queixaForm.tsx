@@ -41,18 +41,19 @@ const QueixaForm = () => {
 
     return (
         <form className="p-10 bg-formContainer" onSubmit={handleSubmit}>
+            <h2 className={"text-center text-2xl pb-10"}>Cadastrar Queixa</h2>
             <div className="flex gap-5">
                 {/* Título */}
                 <div className={st.field}>
                     <label htmlFor="nome">Título</label>
                     <span className={st.fieldValidation}></span>
-                    <input id="nome" type="text" />
+                    <input id="nome" type="text"/>
                 </div>
                 {/* Local */}
                 <div className={st.field}>
                     <label htmlFor="sobrenome">Local</label>
                     <span className={st.fieldValidation}></span>
-                    <input type="text" id="sobrenome" />
+                    <input type="text" id="sobrenome"/>
                 </div>
             </div>
             <div className={st.fields}>
@@ -74,13 +75,12 @@ const QueixaForm = () => {
                         className="hidden"
                         type="file"
                         accept="image/*"
-                        multiple  // Permitir seleção múltipla
+                        multiple
                         onChange={(e) => {
                             const files = e.target.files;
                             if (files) {
                                 Array.from(files).forEach((file) => {
                                     console.log("Arquivo selecionado:", file);
-                                    // Aqui você pode adicionar cada arquivo à FormData se necessário
                                 });
                             }
                         }}
@@ -89,19 +89,14 @@ const QueixaForm = () => {
                         className="h-[112px] border border-gray-300 flex items-center justify-center cursor-pointer"
                         onClick={handleFileSelect}
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8 text-gray-400"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            {/* Ícone de seleção de arquivo */}
-                        </svg>
                         <span className="text-gray-400">Selecionar imagem</span>
                     </div>
                 </div>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex gap-4">
+                <button type="submit" className="w-full bg-primaryBlue py-2 rounded-lg text-white">
+                    Cancelar
+                </button>
                 <button type="submit" className="w-full bg-primaryBlue py-2 rounded-lg text-white">
                     Confirmar
                 </button>

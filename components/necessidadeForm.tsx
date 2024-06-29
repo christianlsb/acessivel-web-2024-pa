@@ -41,18 +41,19 @@ const NecessidadeForm = () => {
 
     return (
         <form className="p-10 bg-formContainer" onSubmit={handleSubmit}>
+            <h2 className={"text-center text-2xl pb-10"}>Cadastrar Necessidade</h2>
             <div className="flex gap-5">
                 {/* Título */}
                 <div className={st.field}>
                     <label htmlFor="nome">Título</label>
                     <span className={st.fieldValidation}></span>
-                    <input id="nome" type="text" />
+                    <input id="nome" type="text"/>
                 </div>
                 {/* Local */}
                 <div className={st.field}>
                     <label htmlFor="sobrenome">Local</label>
                     <span className={st.fieldValidation}></span>
-                    <input type="text" id="sobrenome" />
+                    <input type="text" id="sobrenome"/>
                 </div>
             </div>
             <div className={st.fields}>
@@ -101,7 +102,10 @@ const NecessidadeForm = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex gap-4">
+                <button type="submit" className="w-full bg-primaryBlue py-2 rounded-lg text-white">
+                    Cancelar
+                </button>
                 <button type="submit" className="w-full bg-primaryBlue py-2 rounded-lg text-white">
                     Confirmar
                 </button>

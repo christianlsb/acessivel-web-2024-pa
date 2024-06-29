@@ -1,46 +1,35 @@
 import Head from "next/head";
 import {
-  Sidebar,
-  Tabs,
-  ContainerDashboard,
-  ProfileForm,
-  AddressForm,
-  QueixaForm,
+    Sidebar,
+    Tabs,
+    ContainerDashboard,
+    ProfileForm,
+    AddressForm,
+    QueixaForm,
 } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 import NecessidadeForm from "@/components/necessidadeForm";
 
-export default function Solicit() {
-  const tabs = [
-    {
-      title: "Cadastrar queixa",
-      content: <QueixaForm />,
-    },
-    {
-      title: "Cadastrar necessidade",
-      content: <NecessidadeForm />,
-    },
-  ];
+export default function Relatorios() {
 
-  return (
-    <>
-      <Head>
-        <title>Dashboard</title>
-        <meta
-          property="og:image"
-          content="assets/img/png/here-is-world-4k-61-1920x1080.jpg"
-        />
-        <meta name="description" content="Acessibilidade para todos" />
-      </Head>
-      <div className="container-dashboard">
-        <Sidebar />
-        <ContainerDashboard title="Solicitações">
-          <Tabs tabs={tabs} />
-        </ContainerDashboard>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <Head>
+                <title>Dashboard</title>
+                <meta
+                    property="og:image"
+                    content="assets/img/png/here-is-world-4k-61-1920x1080.jpg"
+                />
+                <meta name="description" content="Acessibilidade para todos" />
+            </Head>
+            <div className="container-dashboard">
+                <Sidebar />
+                <ContainerDashboard title="Relatórios">
+                </ContainerDashboard>
+            </div>
+        </>
+    );
 }
 
 // export const getServerSideProps = async (

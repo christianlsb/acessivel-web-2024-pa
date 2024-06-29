@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ContainerDashboard, Sidebar } from "@/components/index";
+import { ContainerDashboard, Sidebar } from "@/components";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 

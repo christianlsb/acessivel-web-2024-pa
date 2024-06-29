@@ -93,96 +93,100 @@ const AddressForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-10 bg-formContainer">
-      <div className="flex gap-5">
-        {/* CEP */}
-        <div className={st.field}>
-          <label htmlFor="cep">CEP</label>
-          <input
-            id="cep"
-            type="text"
-            value={formData.cep}
-            onChange={handleChange}
-            maxLength={8}
-          />
-          {errors.cep && <span>{errors.cep}</span>}
+      <form onSubmit={handleSubmit} className="p-10 bg-formContainer">
+        <h2 className={"text-center text-2xl pb-10"}>Endereço</h2>
+        <div className="flex gap-5">
+          {/* CEP */}
+          <div className={st.field}>
+            <label htmlFor="cep">CEP</label>
+            <input
+                id="cep"
+                type="text"
+                value={formData.cep}
+                onChange={handleChange}
+                maxLength={8}
+            />
+            {errors.cep && <span>{errors.cep}</span>}
+          </div>
+          {/* Complemento */}
+          <div className={st.field}>
+            <label htmlFor="complemento">Complemento</label>
+            <input
+                id="complemento"
+                type="text"
+                value={formData.complemento}
+                onChange={handleChange}
+            />
+            {errors.complemento && <span>{errors.complemento}</span>}
+          </div>
         </div>
-        {/* Complemento */}
-        <div className={st.field}>
-          <label htmlFor="complemento">Complemento</label>
-          <input
-            id="complemento"
-            type="text"
-            value={formData.complemento}
-            onChange={handleChange}
-          />
-          {errors.complemento && <span>{errors.complemento}</span>}
+        <div className={st.fields}>
+          {/* Nome do logradouro */}
+          <div className={cn(st.field, st.fieldEmail)}>
+            <label htmlFor="nomeLogradouro">Nome do logradouro</label>
+            <input
+                id="nomeLogradouro"
+                className={st.email}
+                type="text"
+                value={formData.nomeLogradouro}
+                onChange={handleChange}
+            />
+            {errors.nomeLogradouro && <span>{errors.nomeLogradouro}</span>}
+          </div>
         </div>
-      </div>
-      <div className={st.fields}>
-        {/* Nome do logradouro */}
-        <div className={cn(st.field, st.fieldEmail)}>
-          <label htmlFor="nomeLogradouro">Nome do logradouro</label>
-          <input
-            id="nomeLogradouro"
-            className={st.email}
-            type="text"
-            value={formData.nomeLogradouro}
-            onChange={handleChange}
-          />
-          {errors.nomeLogradouro && <span>{errors.nomeLogradouro}</span>}
+        <div className="flex gap-5">
+          {/* Número */}
+          <div className={st.field}>
+            <label htmlFor="numero">Número</label>
+            <input
+                id="numero"
+                type="text"
+                value={formData.numero}
+                onChange={handleChange}
+            />
+            {errors.numero && <span>{errors.numero}</span>}
+          </div>
+          {/* Cidade */}
+          <div className={st.field}>
+            <label htmlFor="cidade">Cidade</label>
+            <input
+                id="cidade"
+                type="text"
+                value={formData.cidade}
+                onChange={handleChange}
+            />
+            {errors.cidade && <span>{errors.cidade}</span>}
+          </div>
         </div>
-      </div>
-      <div className="flex gap-5">
-        {/* Número */}
-        <div className={st.field}>
-          <label htmlFor="numero">Número</label>
-          <input
-            id="numero"
-            type="text"
-            value={formData.numero}
-            onChange={handleChange}
-          />
-          {errors.numero && <span>{errors.numero}</span>}
+        <div className="flex gap-5">
+          {/* Bairro */}
+          <div className={st.field}>
+            <label htmlFor="bairro">Bairro</label>
+            <input
+                id="bairro"
+                type="text"
+                value={formData.bairro}
+                onChange={handleChange}
+            />
+            {errors.bairro && <span>{errors.bairro}</span>}
+          </div>
+          {/* Estado */}
+          <div className={st.field}>
+            <label htmlFor="estado">Estado</label>
+            <input
+                id="estado"
+                type="text"
+                value={formData.estado}
+                onChange={handleChange}
+            />
+            {errors.estado && <span>{errors.estado}</span>}
+          </div>
         </div>
-        {/* Cidade */}
-        <div className={st.field}>
-          <label htmlFor="cidade">Cidade</label>
-          <input
-            id="cidade"
-            type="text"
-            value={formData.cidade}
-            onChange={handleChange}
-          />
-          {errors.cidade && <span>{errors.cidade}</span>}
+        <div className={"flex mt-12 gap-4"}>
+          <Button className={"w-full bg-primaryBlue"} type="submit">Cancelar</Button>
+          <Button className={"w-full bg-primaryBlue"} type="submit">Cadastrar</Button>
         </div>
-      </div>
-      <div className="flex gap-5">
-        {/* Bairro */}
-        <div className={st.field}>
-          <label htmlFor="bairro">Bairro</label>
-          <input
-            id="bairro"
-            type="text"
-            value={formData.bairro}
-            onChange={handleChange}
-          />
-          {errors.bairro && <span>{errors.bairro}</span>}
-        </div>
-        {/* Estado */}
-        <div className={st.field}>
-          <label htmlFor="estado">Estado</label>
-          <input
-            id="estado"
-            type="text"
-            value={formData.estado}
-            onChange={handleChange}
-          />
-          {errors.estado && <span>{errors.estado}</span>}
-        </div>
-      </div>
-      <Button type="submit">Cadastrar endereco</Button>
-    </form>
+      </form>
   );
 };
 

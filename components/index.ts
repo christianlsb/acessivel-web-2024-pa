@@ -13,3 +13,4 @@ export { default as ProfileForm } from "./profileForm";
 export { default as QueixaForm } from "./queixaForm";
 export { default as FormGoverno } from "./formGoverno";
 export { default as GovernoLogin } from "./governoLogin"
+export { default as CadpcdForm } from "./cadpcdForm"

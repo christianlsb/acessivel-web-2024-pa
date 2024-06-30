@@ -10,7 +10,7 @@ interface CardNavigatorProps {
 
 const CardNavigator = ({ title, image, link }: CardNavigatorProps) => {
   return (
-    <li className={st.card}>
+    <li  className={st.card}>
       <Link href={link}>
         <span>{title}</span>
       </Link>

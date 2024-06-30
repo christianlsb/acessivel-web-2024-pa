@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Sidebar, Navigator, ContainerDashboard } from "@/components";
+import { Sidebar, Navigator, ContainerDashboard } from "@/components/index";
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
 
@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <ContainerDashboard>
+        <ContainerDashboard title={"Home"}>
           <Navigator />
         </ContainerDashboard>
       </div>
@@ -24,32 +24,32 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { req } = context;
-  const token = req.cookies.token;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
-    return {
-      props: {},
-    };
-  } catch (error) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-};
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const { req } = context;
+//   const token = req.cookies.token;
+//
+//   if (!token) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+//
+//   try {
+//     jwt.verify(token, process.env.JWT_SECRET ?? "");
+//     return {
+//       props: {},
+//     };
+//   } catch (error) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+// };

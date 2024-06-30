@@ -4,7 +4,7 @@ const isQueixante = true
 export const dashboardLinks = [
   {
     title: "Principal",
-    link: "/home",
+    link: "/dashboard/home",
   },
   ...(isGoverno ? [{
     title: "Relatórios",

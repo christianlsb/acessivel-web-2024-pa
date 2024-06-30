@@ -1,5 +1,24 @@
 .card {
   width: calc(50% - 10px);
-  background-color: #ececec;
   height: 200px;
+  background-color: #2364af;
+  display: flex;
+  color: #ffffff;
+  font-size: 22px;
+  border-radius: 12px;
+  transition: 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+}
+
+.card a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card:hover {
+  background-color: #3b3c40;
 }

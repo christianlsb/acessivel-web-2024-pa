@@ -1,8 +1,8 @@
 import { Footer, Header } from "../components/";
 import Head from "next/head";
 import {
-  FormSection,
-  HomeSection,
+    FormSection, Governamental,
+    HomeSection,
 } from "@/sections";
 
 export default function Home() {
@@ -21,9 +21,8 @@ export default function Home() {
       <Header pathname="/" />
       <main>
         <HomeSection />
-        {/* <CampaignsSection />
-        <OrganizationsSection /> */}
         <FormSection />
+        <Governamental />
       </main>
       <Footer />
     </>

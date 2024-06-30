@@ -9,9 +9,11 @@
 .container .content {
   padding: 0 36px;
   display: flex;
-  gap: 50px;
+  gap: 40px;
   width: 1549px;
   align-items: center;
+  max-width: 100%;
+  justify-content: space-between;
 }
 
 .contentImg img {
@@ -21,10 +23,6 @@
 .container .content .containerForm {
   display: flex;
   align-items: center;
-}
-
-.contentForm {
-  padding: 0 34px;
 }
 
 .contentForm h1 {
@@ -75,4 +73,23 @@
   margin: 0;
   padding: 0;
   color: #fa0f00;
+}
+
+
+@media (max-width: 767px) {
+  .contentForm{
+    padding-bottom: 20px;
+  }
+  .content{
+    flex-direction: column;
+  }
+  .content img{
+    display: none;
+  }
+  .fields{
+    flex-direction: column;
+  }
+  .fields .fieldEmail{
+    width: 322px;
+  }
 }

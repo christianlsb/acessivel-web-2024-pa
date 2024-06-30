@@ -3,7 +3,6 @@ import sectionImage from "../assets/img/png/desktop/section-image-home.png";
 import iconArrowRight from "../assets/icons/icon-arrow-right.png";
 const Home = () => {
   return (
-    <>
       <section id="home" className="section_container">
         <div className="gridProject content">
           <div className="text">
@@ -34,7 +33,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </>
   );
 };
 

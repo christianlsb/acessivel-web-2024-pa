@@ -84,7 +84,7 @@ const QueixanteLogin = () => {
     <div className={st.container}>
       <div className={cn(st.content)}>
         <div className={st.containerForm}>
-          <div className={st.contentForm}>
+          <div className={cn(st.contentForm, 'w-[322px] max-w-full')}>
             <h1>Login</h1>
             <p>O portal que te escuta! Estamos aqui por você.</p>
             <form onSubmit={handleSubmit(onSubmit)}>

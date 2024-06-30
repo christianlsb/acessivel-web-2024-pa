@@ -21,19 +21,6 @@ const Header = ({ pathname }: HeaderProps) => {
         </Link>
         {pathname === "/" && (
           <>
-            <div className="mid_box">
-              <nav>
-                <ul>
-                  <li>
-                    <a href="#">Campanhas</a>
-                  </li>
-                  <li>
-                    <a href="#">Acessibilidade</a>
-                  </li>
-                  <li></li>
-                </ul>
-              </nav>
-            </div>
             <div className="buttons">
               <button className="button_theme">
                 <Image

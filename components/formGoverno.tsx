@@ -124,7 +124,7 @@ const FormGoverno = () => {
                 </Button>
               </form>
               {error && <p className={st.error}>{error}</p>}
-              <Link href={"/login"}>
+              <Link href={"/governo-login"}>
                 Já faz parte? Clique aqui e acesse a sua conta!
               </Link>
             </div>

@@ -19,22 +19,22 @@ export default function GovernoCadastro() {
   );
 }
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { req } = context;
-  const token = req.cookies.token;
-
-  if (token) {
-    return {
-      redirect: {
-        destination: "/home",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {},
-    };
-  }
-};
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const { req } = context;
+//   const token = req.cookies.token;
+//
+//   if (token) {
+//     return {
+//       redirect: {
+//         destination: "/home",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {},
+//     };
+//   }
+// };

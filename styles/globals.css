@@ -46,6 +46,11 @@ img {
   display: block;
 }
 
+label{
+  margin-bottom: 10px;
+  display: block;
+}
+
 .section_container {
   padding: 20px 0px;
 }

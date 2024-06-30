@@ -1,11 +1,9 @@
 import Head from "next/head";
 import {
     Sidebar,
-    Tabs,
+    Grafico,
     ContainerDashboard,
-    ProfileForm,
-    AddressForm,
-    QueixaForm,
+
 } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
@@ -26,6 +24,7 @@ export default function Relatorios() {
             <div className="container-dashboard">
                 <Sidebar />
                 <ContainerDashboard title="Relatórios">
+                    <Grafico />
                 </ContainerDashboard>
             </div>
         </>

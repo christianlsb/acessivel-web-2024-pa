@@ -1,6 +1,5 @@
 export { default as Header } from "./header";
 export { default as Footer } from "./footer";
-export { default as VectorBlue } from "./vector";
 export { default as FormQueixante } from "./formQueixante";
 export { default as FormLogin } from "./queixanteLogin";
 export { default as Sidebar } from "./sidebar";
@@ -14,3 +13,6 @@ export { default as QueixaForm } from "./queixaForm";
 export { default as FormGoverno } from "./formGoverno";
 export { default as GovernoLogin } from "./governoLogin"
 export { default as CadpcdForm } from "./cadpcdForm"
+export { default as Grafico } from "./dashboard"
+export { default as BarChart } from "./barChart"
+export { default as LineChart } from "./lineChart"

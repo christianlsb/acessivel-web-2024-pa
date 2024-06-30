@@ -7,7 +7,7 @@ import { z } from "zod";
 const formSchema = z.object({
   cep: z.string().length(8, "O CEP deve ter 8 dígitos."),
   complemento: z.string().optional(),
-  nomeLogradouro: z.string().min(1, "Nome do logradouro é obrigatório."),
+  logradouro: z.string().min(1, "Nome do logradouro é obrigatório."),
   numero: z.string().min(1, "Número é obrigatório."),
   cidade: z.string().min(1, "Cidade é obrigatória."),
   bairro: z.string().min(1, "Bairro é obrigatório."),
@@ -15,9 +15,10 @@ const formSchema = z.object({
 });
 
 interface AddressFormProps {
+  id_queixante: number;
   cep: string;
   complemento: string;
-  nomeLogradouro: string;
+  logradouro: string;
   numero: string;
   cidade: string;
   bairro: string;
@@ -26,9 +27,10 @@ interface AddressFormProps {
 
 const AddressForm = () => {
   const [formData, setFormData] = useState<AddressFormProps>({
+    id_queixante: 5,
     cep: "",
     complemento: "",
-    nomeLogradouro: "",
+    logradouro: "",
     numero: "",
     cidade: "",
     bairro: "",
@@ -68,7 +70,7 @@ const AddressForm = () => {
         if (!data.erro) {
           setFormData((prevData) => ({
             ...prevData,
-            nomeLogradouro: data.logradouro || "",
+            logradouro: data.logradouro || "",
             bairro: data.bairro || "",
             cidade: data.localidade || "",
             estado: data.uf || "",
@@ -80,7 +82,7 @@ const AddressForm = () => {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const result = formSchema.safeParse(formData);
 
@@ -89,7 +91,24 @@ const AddressForm = () => {
       setErrors(formattedErrors);
       return;
     }
-    console.log("Dados validados:", formData);
+
+    try {
+      const response = await fetch('http://localhost:2424/endereco/post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Dados enviados com sucesso:', await response.json());
+      } else {
+        console.error('Erro ao enviar os dados:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+    }
   };
 
   return (
@@ -123,15 +142,15 @@ const AddressForm = () => {
         <div className={st.fields}>
           {/* Nome do logradouro */}
           <div className={cn(st.field, st.fieldEmail)}>
-            <label htmlFor="nomeLogradouro">Nome do logradouro</label>
+            <label htmlFor="logradouro">Nome do logradouro</label>
             <input
-                id="nomeLogradouro"
+                id="logradouro"
                 className={st.email}
                 type="text"
-                value={formData.nomeLogradouro}
+                value={formData.logradouro}
                 onChange={handleChange}
             />
-            {errors.nomeLogradouro && <span>{errors.nomeLogradouro}</span>}
+            {errors.logradouro && <span>{errors.logradouro}</span>}
           </div>
         </div>
         <div className="flex gap-5">
@@ -183,7 +202,7 @@ const AddressForm = () => {
           </div>
         </div>
         <div className={"flex mt-12 gap-4"}>
-          <Button className={"w-full bg-primaryBlue"} type="submit">Cancelar</Button>
+          <Button className={"w-full bg-primaryBlue"} type="button">Cancelar</Button>
           <Button className={"w-full bg-primaryBlue"} type="submit">Cadastrar</Button>
         </div>
       </form>

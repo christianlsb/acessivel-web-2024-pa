@@ -9,7 +9,7 @@ import {
 } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
-import NecessidadeForm from "@/components/necessidadeForm";
+import NecessidadeForm from "@/components/form/necessidadeForm";
 
 export default function Solicit() {
   const tabs = [

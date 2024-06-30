@@ -1,5 +1,5 @@
 import st from "@/styles/Register.module.css";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 import cn from "classnames";
 import { z } from "zod";

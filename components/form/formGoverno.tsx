@@ -8,7 +8,7 @@ import Image from "next/image";
 import gov from "@/assets/img/jpg/gov.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import Link from "./link";
+import Link from "../link";
 import { useToast } from "@/components/ui/use-toast";
 
 

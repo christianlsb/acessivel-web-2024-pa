@@ -1,5 +1,5 @@
 import st from "@/styles/Register.module.css";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 import { z } from "zod";
 import Link from "@/components/link";

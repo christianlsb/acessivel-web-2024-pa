@@ -5,10 +5,10 @@ import { z } from "zod";
 import { useRouter } from "next/router";
 import st from "@/styles/Register.module.css";
 import Image from "next/image";
-import dog from "@/assets/img/jpg/dog.jpg";
+import gov from "@/assets/img/jpg/gov.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import Link from "./link";
+import Link from "../link";
 import Cookies from "js-cookie";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-const QueixanteLogin = () => {
+const GovernoLogin = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -84,7 +84,7 @@ const QueixanteLogin = () => {
     <div className={st.container}>
       <div className={cn(st.content)}>
         <div className={st.containerForm}>
-          <div className={cn(st.contentForm, 'w-[322px] max-w-full')}>
+          <div className={st.contentForm}>
             <h1>Login</h1>
             <p>O portal que te escuta! Estamos aqui por você.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,17 +115,17 @@ const QueixanteLogin = () => {
                 {loading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
-            <Link href={"/queixante-cadastro"}>
-              Já faz parte? Clique aqui e acesse a sua conta!
+            <Link href={"/governo-cadastro"}>
+              Nao faz parte? Clique aqui e solicite sua conta!
             </Link>
           </div>
         </div>
         <div className={st.contentImg}>
-          <Image src={dog} width={692} height={610} alt="Imagem do cachorro" />
+          <Image src={gov} width={692} height={610} alt="Imagem do cachorro" />
         </div>
       </div>
     </div>
   );
 };
 
-export default QueixanteLogin;
+export default GovernoLogin;

@@ -49,7 +49,7 @@ const CadpcdForm = () => {
   };
 
   return (
-      <form onSubmit={onSubmit} className="p-10 bg-formContainer">
+      <form onSubmit={onSubmit} className="p-10 bg-white rounded-2xl">
         <h2 className={"text-center text-2xl pb-10"}>CadPCD</h2>
         <div className="flex gap-5">
           {/* CADPCD */}

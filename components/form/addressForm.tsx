@@ -37,6 +37,8 @@ const AddressForm = () => {
     estado: "",
   });
 
+  console.log(formData)
+
   const [errors, setErrors] = useState({});
 
   const handleChange = async (event: any) => {
@@ -112,7 +114,7 @@ const AddressForm = () => {
   };
 
   return (
-      <form onSubmit={handleSubmit} className="p-10 bg-formContainer">
+      <form onSubmit={handleSubmit} className="p-10 bg-white rounded-2xl">
         <h2 className={"text-center text-2xl pb-10"}>Endereço</h2>
         <div className="flex gap-5">
           {/* CEP */}

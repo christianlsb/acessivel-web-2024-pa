@@ -11,8 +11,10 @@ export { default as AddressForm } from "./form/addressForm";
 export { default as ProfileForm } from "./form/profileForm";
 export { default as QueixaForm } from "./form/queixaForm";
 export { default as FormGoverno } from "./form/formGoverno";
-export { default as GovernoLogin } from "./form/governoLogin"
-export { default as CadpcdForm } from "./form/cadpcdForm"
-export { default as Grafico } from "./dashboard"
-export { default as BarChart } from "./barChart"
-export { default as LineChart } from "./lineChart"
+export { default as GovernoLogin } from "./form/governoLogin";
+export { default as CadpcdForm } from "./form/cadpcdForm";
+export { default as Grafico } from "./dashboard";
+export { default as BarChart } from "./barChart";
+export { default as LineChart } from "./lineChart";
+export { default as ContactForm } from "./form/contactForm";
+export { default as FormGovernoSenha } from "./form/formGovernoSenha";

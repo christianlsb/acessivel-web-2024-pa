@@ -7,7 +7,7 @@ const ProfileForm = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <form className="p-10 bg-formContainer">
+    <form className="p-10 bg-white rounded-2xl">
       <h2 className={"text-center text-2xl pb-10"}>Dados pessoais</h2>
       <div className="flex gap-5">
         {/* Nome */}

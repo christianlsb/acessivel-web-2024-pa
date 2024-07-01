@@ -115,8 +115,8 @@ const GovernoLogin = () => {
                 {loading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
-            <Link href={"/governo-cadastro"}>
-              Nao faz parte? Clique aqui e solicite sua conta!
+            <Link className="mt-5" href={"/governo-cadastro"}>
+              Não faz parte? Clique aqui e solicite sua conta!
             </Link>
           </div>
         </div>

@@ -40,7 +40,7 @@ const QueixaForm = () => {
     };
 
     return (
-        <form className="p-10 bg-formContainer" onSubmit={handleSubmit}>
+        <form className="p-10 bg-white rounded-2xl" onSubmit={handleSubmit}>
             <h2 className={"text-center text-2xl pb-10"}>Cadastrar Queixa</h2>
             <div className="flex gap-5">
                 {/* Título */}

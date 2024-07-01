@@ -40,7 +40,6 @@
   display: block;
   font-size: 14px;
   text-align: center;
-  margin-top: 20px;
 }
 
 .field {
@@ -75,21 +74,20 @@
   color: #fa0f00;
 }
 
-
 @media (max-width: 767px) {
-  .contentForm{
+  .contentForm {
     padding-bottom: 20px;
   }
-  .content{
+  .content {
     flex-direction: column;
   }
-  .content img{
+  .content img {
     display: none;
   }
-  .fields{
+  .fields {
     flex-direction: column;
   }
-  .fields .fieldEmail{
+  .fields .fieldEmail {
     width: 322px;
   }
 }

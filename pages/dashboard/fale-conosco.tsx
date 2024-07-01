@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ContainerDashboard, Sidebar } from "@/components";
+import {ContactForm, ContainerDashboard, Sidebar} from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 
@@ -16,40 +16,40 @@ export default function ContactUs() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <ContainerDashboard>
-          <h1>Fale Conosco</h1>
+        <ContainerDashboard title={"Fale conosco"}>
+            <ContactForm/>
         </ContainerDashboard>
       </div>
     </>
   );
 }
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { req } = context;
-  const token = req.cookies.token;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
-    return {
-      props: {},
-    };
-  } catch (error) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-};
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const { req } = context;
+//   const token = req.cookies.token;
+//
+//   if (!token) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+//
+//   try {
+//     jwt.verify(token, process.env.JWT_SECRET ?? "");
+//     return {
+//       props: {},
+//     };
+//   } catch (error) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+// };

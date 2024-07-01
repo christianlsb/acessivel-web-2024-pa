@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -45,7 +45,7 @@ const QueixanteLogin = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch("/api/auth", {
+      const response = await fetch("/api/auth-queixante", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,19 +64,24 @@ const QueixanteLogin = () => {
         throw new Error(error);
       }
 
-      const data = await response.json();
+      const { token, user } = await response.json();
 
-      Cookies.set("token", data.token, { expires: 7 });
+      Cookies.set("token", token, { expires: 1 / 24 });
+      Cookies.set("user", JSON.stringify({ user }), { expires: 1 / 24 });
+
       toast({
         title: "Sucesso",
         description: "Login efetuado com sucesso!",
         variant: "sucess",
       });
+
       setTimeout(() => {
-        router.push("/home");
+        router.push("/dashboard/home");
       }, 1000);
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +89,7 @@ const QueixanteLogin = () => {
     <div className={st.container}>
       <div className={cn(st.content)}>
         <div className={st.containerForm}>
-          <div className={cn(st.contentForm, 'w-[322px] max-w-full')}>
+          <div className={cn(st.contentForm, "w-[322px] max-w-full")}>
             <h1>Login</h1>
             <p>O portal que te escuta! Estamos aqui por você.</p>
             <form onSubmit={handleSubmit(onSubmit)}>

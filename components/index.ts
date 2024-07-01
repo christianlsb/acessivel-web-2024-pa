@@ -18,3 +18,7 @@ export { default as BarChart } from "./barChart";
 export { default as LineChart } from "./lineChart";
 export { default as ContactForm } from "./form/contactForm";
 export { default as FormGovernoSenha } from "./form/formGovernoSenha";
+export { default as QueixaList } from "./queixasList";
+export { default as NecessidadesList } from "./necessidadesList";
+export { default as QueixasGovernoAll } from "./queixaAllGoverno";
+export { default as NecessidadesGovernoAll } from "./necessidadesAllGoverno";

@@ -1,9 +1,15 @@
 import Head from "next/head";
 import { Sidebar, Navigator, ContainerDashboard } from "@/components/index";
 import jwt from "jsonwebtoken";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import Cookies from "js-cookie";
 
 export default function Home() {
+  const authToken = Cookies.get("auth");
+  if (authToken) {
+    console.log("Token: ", authToken);
+  }
+
   return (
     <>
       <Head>
@@ -24,32 +30,31 @@ export default function Home() {
   );
 }
 
-// export const getServerSideProps = async (
-//   context: GetServerSidePropsContext
-// ) => {
-//   const { req } = context;
-//   const token = req.cookies.token;
-//
-//   if (!token) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-//
-//   try {
-//     jwt.verify(token, process.env.JWT_SECRET ?? "");
-//     return {
-//       props: {},
-//     };
-//   } catch (error) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-// };
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};

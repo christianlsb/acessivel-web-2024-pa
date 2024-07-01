@@ -7,10 +7,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { nome, matricula, email } = req.body;
+    const { nome, matricula, email, idGoverno } = req.body;
 
-    const linkActive = `http://localhost:2424/governo/patch`;
-    const message = `A pessoa ${nome} com a matricula ${matricula} e email ${email} solicitou um novo cadastro governamental. Para aprovar a solicitação, clique no link abaixo: \n\n${linkActive}`;
+    const linkActive = `http://localhost:2424/governo/patch?idGoverno=${idGoverno}`;
+    const message = `${nome} com a matricula ${matricula} e email ${email} solicitou um novo cadastro governamental. Para aprovar a solicitação, clique no link abaixo: \n\n${linkActive}`;
 
     let transporter = nodemailer.createTransport({
       service: "gmail",

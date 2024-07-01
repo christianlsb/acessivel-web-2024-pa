@@ -1,8 +1,10 @@
 import st from "@/styles/Register.module.css";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 import { z } from "zod";
+import Cookies from "js-cookie";
+import Link from "../link";
 
 const formSchema = z.object({
   cep: z.string().length(8, "O CEP deve ter 8 dígitos."),
@@ -15,7 +17,7 @@ const formSchema = z.object({
 });
 
 interface AddressFormProps {
-  id_queixante: number;
+  idQueixante: number;
   cep: string;
   complemento: string;
   logradouro: string;
@@ -26,8 +28,45 @@ interface AddressFormProps {
 }
 
 const AddressForm = () => {
-  const [formData, setFormData] = useState<AddressFormProps>({
-    id_queixante: 5,
+  const [getUser, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const { user } = JSON.parse(Cookies.get("user") || "{}");
+
+  const getUserData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:2424/queixante/get/${user.id_queixante}`
+      );
+      if (!response.ok) {
+        throw new Error("Erro ao obter dados do usuário");
+      }
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const initialFormData: AddressFormProps = {
+    idQueixante: user.id_queixante,
+    cep: "",
+    complemento: "",
+    logradouro: "",
+    numero: "",
+    cidade: "",
+    bairro: "",
+    estado: "",
+  };
+
+  const [formData, setFormData] = useState<AddressFormProps>(initialFormData);
+  const [errors, setErrors] = useState({
     cep: "",
     complemento: "",
     logradouro: "",
@@ -37,9 +76,24 @@ const AddressForm = () => {
     estado: "",
   });
 
-  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    if (getUser.endereco) {
+      setFormData({
+        ...initialFormData,
+        cep: getUser.endereco.cep || "",
+        complemento: getUser.endereco.complemento || "",
+        logradouro: getUser.endereco.logradouro || "",
+        numero: getUser.endereco.numero || "",
+        cidade: getUser.endereco.cidade || "",
+        bairro: getUser.endereco.bairro || "",
+        estado: getUser.endereco.estado || "",
+      });
+    } else {
+      setFormData(initialFormData);
+    }
+  }, [getUser]);
 
-  const handleChange = async (event: any) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
 
     if (id === "cep" && value.length > 8) return;
@@ -54,12 +108,12 @@ const AddressForm = () => {
       fieldSchema.parse(value);
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [id]: null,
+        [id]: "",
       }));
     } catch (error: any) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [id]: error.errors[0].message,
+        [id]: error.errors[0]?.message || "Erro desconhecido",
       }));
     }
 
@@ -82,7 +136,7 @@ const AddressForm = () => {
     }
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const result = formSchema.safeParse(formData);
 
@@ -111,11 +165,14 @@ const AddressForm = () => {
     }
   };
 
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
   return (
     <form onSubmit={handleSubmit} className="p-10 bg-white rounded-2xl">
       <h2 className={"text-center text-2xl pb-10"}>Endereço</h2>
       <div className="flex gap-5">
-        {/* CEP */}
         <div className={st.field}>
           <label htmlFor="cep">CEP</label>
           <input
@@ -127,7 +184,6 @@ const AddressForm = () => {
           />
           {errors.cep && <span>{errors.cep}</span>}
         </div>
-        {/* Complemento */}
         <div className={st.field}>
           <label htmlFor="complemento">Complemento</label>
           <input
@@ -140,7 +196,6 @@ const AddressForm = () => {
         </div>
       </div>
       <div className={st.fields}>
-        {/* Nome do logradouro */}
         <div className={cn(st.field, st.fieldEmail)}>
           <label htmlFor="logradouro">Nome do logradouro</label>
           <input
@@ -154,7 +209,6 @@ const AddressForm = () => {
         </div>
       </div>
       <div className="flex gap-5">
-        {/* Número */}
         <div className={st.field}>
           <label htmlFor="numero">Número</label>
           <input
@@ -165,7 +219,6 @@ const AddressForm = () => {
           />
           {errors.numero && <span>{errors.numero}</span>}
         </div>
-        {/* Cidade */}
         <div className={st.field}>
           <label htmlFor="cidade">Cidade</label>
           <input
@@ -178,7 +231,6 @@ const AddressForm = () => {
         </div>
       </div>
       <div className="flex gap-5">
-        {/* Bairro */}
         <div className={st.field}>
           <label htmlFor="bairro">Bairro</label>
           <input
@@ -189,7 +241,6 @@ const AddressForm = () => {
           />
           {errors.bairro && <span>{errors.bairro}</span>}
         </div>
-        {/* Estado */}
         <div className={st.field}>
           <label htmlFor="estado">Estado</label>
           <input
@@ -203,7 +254,7 @@ const AddressForm = () => {
       </div>
       <div className={"flex mt-12 gap-4"}>
         <Button className={"w-full bg-primaryBlue"} type="button">
-          Cancelar
+          <Link href={"/dashboard/home"}>Cancelar</Link>
         </Button>
         <Button className={"w-full bg-primaryBlue"} type="submit">
           Cadastrar

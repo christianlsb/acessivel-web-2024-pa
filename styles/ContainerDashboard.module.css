@@ -1,7 +1,8 @@
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 40px 80px;
   max-width: 100%;
-  background-color: #ECECEC;
+  background-color: #ececec;
+  min-height: 100vh;
 }

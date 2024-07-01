@@ -15,80 +15,54 @@ import InputMask from "react-input-mask";
 import { validate } from "gerador-validador-cpf";
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
-const formSchema = z
-  .object({
-    nome: z
-      .string()
-      .min(1, "O nome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
-    sobrenome: z
-      .string()
-      .min(1, "O sobrenome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
-    email: z
-      .string()
-      .min(1, "O email é obrigatório")
-      .max(100, "Inválido, no máximo 100 letras")
-      .email("Email inválido")
-      .refine((campo) => campo.length >= 5, {
-        message: "Inválido, no mínimo 5 letras",
-      }),
-    cpf: z
-      .string()
-      .min(1, "O CPF é obrigatório")
-      .length(14, "O CPF deve conter 11 números")
-      .refine((cpf) => {
-        const isValid = validate(cpf.replace(/[^\d]/g, ""));
-        return isValid;
-      }, "CPF inválido"),
-    dataNascimento: z
-      .string()
-      .min(1, "A data de nascimento é obrigatória")
-      .regex(
-        /^\d{2}\/\d{2}\/\d{4}$/,
-        "Data de nascimento inválida, use o formato DD/MM/AAAA"
-      ),
-    senha: z
-      .string()
-      .min(1, "A senha é obrigatória")
-      .max(50, "Inválida, no máximo 50 carateres")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
-        "Senha inválida, ex:: Senha123!"
-      )
-      .refine((campo) => campo.length >= 8, {
-        message: "Inválido, no mínimo 8 caracteres",
-      }),
-    confirmPassword: z
-      .string()
-      .min(1, "A senha é obrigatória")
-      .max(50, "Inválida, no máximo 50 carateres")
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$/,
-        "Senha inválida, ex: Senha123!"
-      )
-      .refine((campo) => campo.length >= 8, {
-        message: "Inválido, no mínimo 8 caracteres",
-      }),
-  })
-  .refine((campos) => campos.senha === campos.confirmPassword, {
-    message: "As senhas devem ser iguais!",
-    path: ["confirmPassword"],
-  });
+const formSchema = z.object({
+  nome: z
+    .string()
+    .min(1, "O nome é obrigatório")
+    .max(50, "Inválido, no máximo 50 letras")
+    .regex(
+      /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+      "Nome inválido"
+    )
+    .refine((campo) => campo.length >= 3, {
+      message: "Inválido, no mínimo 3 letras",
+    }),
+  sobrenome: z
+    .string()
+    .min(1, "O sobrenome é obrigatório")
+    .max(50, "Inválido, no máximo 50 letras")
+    .regex(
+      /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+      "Nome inválido"
+    )
+    .refine((campo) => campo.length >= 3, {
+      message: "Inválido, no mínimo 3 letras",
+    }),
+  email: z
+    .string()
+    .min(1, "O email é obrigatório")
+    .max(100, "Inválido, no máximo 100 letras")
+    .email("Email inválido")
+    .refine((campo) => campo.length >= 5, {
+      message: "Inválido, no mínimo 5 letras",
+    }),
+  cpf: z
+    .string()
+    .min(1, "O CPF é obrigatório")
+    .length(14, "O CPF deve conter 11 números")
+    .refine((cpf) => {
+      const isValid = validate(cpf.replace(/[^\d]/g, ""));
+      return isValid;
+    }, "CPF inválido"),
+  dataNascimento: z
+    .string()
+    .min(1, "A data de nascimento é obrigatória")
+    .regex(
+      /^\d{2}\/\d{2}\/\d{4}$/,
+      "Data de nascimento inválida, use o formato DD/MM/AAAA"
+    ),
+  matricula: z.string().min(1, "A matricula é obrigatória"),
+});
 
 const FormGoverno = () => {
   const { toast } = useToast();
@@ -119,7 +93,7 @@ const FormGoverno = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:2424/queixante/post", {
+      const response = await fetch("http://localhost:2424/governo/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,12 +101,19 @@ const FormGoverno = () => {
         body: JSON.stringify(formattedValues),
       });
 
+      const data = await response.json();
+
       const responseEmail = await fetch("/api/post-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: values.email, nome: values.nome }),
+        body: JSON.stringify({
+          email: values.email,
+          nome: values.nome,
+          matricula: values.matricula,
+          idGoverno: data.idGoverno,
+        }),
       });
 
       if (!response.ok || !responseEmail.ok) {
@@ -142,13 +123,12 @@ const FormGoverno = () => {
         });
         throw new Error("Erro ao solicitar cadastro");
       }
+
       toast({
         title: "Sua conta foi solicitada com sucesso!",
         variant: "sucess",
       });
-      setTimeout(() => {
-        router.push("/governo-solicitacao-cadastro");
-      }, 2000);
+      router.push("/governo-solicitacao-cadastro");
     } catch (error: any) {
       setError(error.message);
     }
@@ -236,6 +216,15 @@ const FormGoverno = () => {
                     {...register("dataNascimento")}
                   />
                 </div>
+              </div>
+              <div className={st.field}>
+                <label htmlFor="nome">Matricula</label>
+                <span className={st.fieldValidation}>
+                  {errors?.matricula
+                    ? (errors.matricula.message as string)
+                    : null}
+                </span>
+                <input id="matricula" type="text" {...register("matricula")} />
               </div>
               <div className="flex gap-5">
                 <Button

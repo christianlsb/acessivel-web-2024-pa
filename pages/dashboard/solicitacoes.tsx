@@ -6,10 +6,13 @@ import {
   ProfileForm,
   AddressForm,
   QueixaForm,
+  QueixaList,
+  NecessidadesList,
 } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 import NecessidadeForm from "@/components/form/necessidadeForm";
+import { title } from "process";
 
 export default function Solicit() {
   const tabs = [
@@ -20,6 +23,14 @@ export default function Solicit() {
     {
       title: "Cadastrar necessidade",
       content: <NecessidadeForm />,
+    },
+    {
+      title: "Suas queixas",
+      content: <QueixaList />,
+    },
+    {
+      title: "Suas necessidades",
+      content: <NecessidadesList />,
     },
   ];
 
@@ -43,32 +54,31 @@ export default function Solicit() {
   );
 }
 
-// export const getServerSideProps = async (
-//   context: GetServerSidePropsContext
-// ) => {
-//   const { req } = context;
-//   const token = req.cookies.token;
-//
-//   if (!token) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-//
-//   try {
-//     jwt.verify(token, process.env.JWT_SECRET ?? "");
-//     return {
-//       props: {},
-//     };
-//   } catch (error) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-// };
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { req } = context;
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    return {
+      props: {},
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};

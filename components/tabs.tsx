@@ -1,5 +1,6 @@
 import { useState } from "react";
 import st from "@/styles/Tabs.module.css";
+import cn from "classnames";
 
 type Tab = {
   title?: string | JSX.Element;
@@ -24,7 +25,7 @@ const Tabs = ({ tabs }: TabsProps) => {
           {tabs.map((tab, index) => (
             <li
               key={index}
-              className={activeTab === index ? "active" : ""}
+              className={cn(activeTab === index ? "active" : "", st.tab)}
               onClick={() => handleTabClick(index)}
             >
               {tab.title}

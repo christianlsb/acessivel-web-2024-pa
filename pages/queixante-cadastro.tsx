@@ -28,7 +28,7 @@ export const getServerSideProps = async (
   if (token) {
     return {
       redirect: {
-        destination: "/home",
+        destination: "/dashboard/home",
         permanent: false,
       },
     };

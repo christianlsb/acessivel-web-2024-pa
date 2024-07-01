@@ -1,13 +1,8 @@
 import { Footer, Header } from "../components/";
 import Head from "next/head";
-import {
-    FormSection, Governamental,
-    HomeSection,
-} from "@/sections";
+import { FormSection, Governamental, HomeSection } from "@/sections";
 
 export default function Home() {
-  console.log(process.env.DATABASE_URL, "teste");
-
   return (
     <>
       <Head>

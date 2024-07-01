@@ -5,6 +5,7 @@ import cn from "classnames";
 import { z } from "zod";
 import Cookies from "js-cookie";
 import Link from "../link";
+import { toast } from "../ui/use-toast";
 
 const formSchema = z.object({
   cep: z.string().length(8, "O CEP deve ter 8 dígitos."),
@@ -153,6 +154,12 @@ const AddressForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+      });
+
+      toast({
+        title: "Endereço cadastrado com sucesso!",
+        description: "Seu endereço foi cadastrado com sucesso!",
+        variant: "sucess",
       });
 
       if (response.ok) {

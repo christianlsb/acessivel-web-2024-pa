@@ -76,7 +76,7 @@ const GovernoLogin = () => {
       });
 
       setTimeout(() => {
-        router.push("/dashboard/home");
+        router.push("/dashboard/gov/relatorios");
       }, 1000);
     } catch (error: any) {
       setError(error.message);

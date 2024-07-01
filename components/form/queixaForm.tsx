@@ -60,31 +60,39 @@ const QueixaForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:2424/queixa/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(getQueixa),
-      });
+      if (getUser.endereco) {
+        const response = await fetch(`http://localhost:2424/queixa/post`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(getQueixa),
+        });
 
-      if (!response.ok) {
-        throw new Error("Erro ao enviar dados");
+        if (!response.ok) {
+          throw new Error("Erro ao enviar dados");
+        }
+
+        toast({
+          title: "Queixa enviada com sucesso!",
+          description: "Sua queixa foi enviada com sucesso!",
+          variant: "sucess",
+        });
+
+        setQueixa({
+          idQueixante: getUser.idQueixante,
+          titulo: "",
+          localizacao: "",
+          descricao: "",
+          imagemLink: "",
+        });
+      } else {
+        toast({
+          title: "Você precisa cadastrar seu endereço.",
+          description: "Complete seu endereço..",
+          variant: "destructive",
+        });
       }
-
-      toast({
-        title: "Queixa enviada com sucesso!",
-        description: "Sua queixa foi enviada com sucesso!",
-        variant: "sucess",
-      });
-
-      setQueixa({
-        idQueixante: getUser.idQueixante,
-        titulo: "",
-        localizacao: "",
-        descricao: "",
-        imagemLink: "",
-      });
     } catch (error) {
       toast({
         title: "Erro ao enviar a queixa",

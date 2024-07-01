@@ -62,33 +62,42 @@ const NecessidadeForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:2424/necessidade/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(getQueixa),
-      });
+      if (getUser.endereco) {
+        const response = await fetch(`http://localhost:2424/necessidade/post`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(getQueixa),
+        });
 
-      if (!response.ok) {
-        throw new Error("Erro ao enviar dados");
+        if (!response.ok) {
+          throw new Error("Erro ao enviar dados");
+        }
+
+        toast({
+          title: "Necessidade cadastrada com sucesso!",
+          description: "Sua necessidade foi cadastrada com sucesso!",
+          variant: "sucess",
+        });
+
+        setQueixa({
+          idQueixante: getUser.idQueixante,
+          titulo: "",
+          localizacao: "",
+          descricao: "",
+          cronica: false,
+          tipo: "",
+          imagemLink: "",
+        });
+      } else {
+        toast({
+          title: "Erro ao cadastrar necessidade",
+          description:
+            "Você precisa preencher o seu endereço antes de cadastrar uma necessidade",
+          variant: "destructive",
+        });
       }
-
-      toast({
-        title: "Necessidade cadastrada com sucesso!",
-        description: "Sua necessidade foi cadastrada com sucesso!",
-        variant: "sucess",
-      });
-
-      setQueixa({
-        idQueixante: getUser.idQueixante,
-        titulo: "",
-        localizacao: "",
-        descricao: "",
-        cronica: false,
-        tipo: "",
-        imagemLink: "",
-      });
     } catch (error) {
       console.error("Erro na requisição:", error);
       toast({

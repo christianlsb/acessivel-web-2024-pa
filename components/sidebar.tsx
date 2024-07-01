@@ -72,14 +72,16 @@ const Sidebar = () => {
       <div className={st.content}>
         <nav>
           <ul className={st.list}>
-            <li>
-              <Link
-                href="/dashboard/home"
-                active={activeLink === "/dashboard/home"}
-              >
-                Principal
-              </Link>
-            </li>
+            {getUserQueixante.idQueixante && (
+              <li>
+                <Link
+                  href="/dashboard/home"
+                  active={activeLink === "/dashboard/home"}
+                >
+                  Principal
+                </Link>
+              </li>
+            )}
             {getUserGoverno.idGoverno && (
               <li>
                 <Link

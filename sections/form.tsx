@@ -36,7 +36,7 @@ const FormSection = () => {
   return (
     <>
       <section id="form" className="section_container">
-        <div className="grid content">
+        <div className="gridProject content">
           <h2>Queremos ouvir você!</h2>
           <div className="box">
             <Image
@@ -200,7 +200,7 @@ const FormSection = () => {
               </form>
             </Form>
           </div> */}
-          <Link href={"/register"} className="button_acess">
+          <Link href={"/queixante-cadastro"} className="button_acess">
             Cadastrar
             <Image
               src={iconArrowRight}

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/router";
 import st from "@/styles/Register.module.css";
 import Image from "next/image";
-import dog from "@/assets/img/jpg/dog.jpg";
+import gov from "@/assets/img/jpg/gov.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import Link from "./link";
+import Link from "../link";
 import Cookies from "js-cookie";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-const FormLogin = () => {
+const GovernoLogin = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ const FormLogin = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch("/api/auth", {
+      const response = await fetch("/api/auth-governo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,19 +64,24 @@ const FormLogin = () => {
         throw new Error(error);
       }
 
-      const data = await response.json();
+      const { token, user } = await response.json();
 
-      Cookies.set("token", data.token, { expires: 7 });
+      Cookies.set("token", token, { expires: 1 / 24 });
+      Cookies.set("user", JSON.stringify({ user }), { expires: 1 / 24 });
+
       toast({
         title: "Sucesso",
         description: "Login efetuado com sucesso!",
         variant: "sucess",
       });
+
       setTimeout(() => {
-        router.push("/home");
+        router.push("/dashboard/gov/relatorios");
       }, 1000);
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +89,7 @@ const FormLogin = () => {
     <div className={st.container}>
       <div className={cn(st.content)}>
         <div className={st.containerForm}>
-          <div className={st.contentForm}>
+          <div className={cn(st.contentForm, "w-[322px] max-w-full")}>
             <h1>Login</h1>
             <p>O portal que te escuta! Estamos aqui por você.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,17 +120,17 @@ const FormLogin = () => {
                 {loading ? "Carregando..." : "Entrar"}
               </Button>
             </form>
-            <Link href={"/register"}>
+            <Link href={"/queixante-cadastro"}>
               Já faz parte? Clique aqui e acesse a sua conta!
             </Link>
           </div>
         </div>
         <div className={st.contentImg}>
-          <Image src={dog} width={692} height={610} alt="Imagem do cachorro" />
+          <Image src={gov} width={692} height={610} alt="Imagem do gov" />
         </div>
       </div>
     </div>
   );
 };
 
-export default FormLogin;
+export default GovernoLogin;

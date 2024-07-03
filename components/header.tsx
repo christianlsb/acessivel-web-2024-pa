@@ -13,25 +13,14 @@ const Header = ({ pathname }: HeaderProps) => {
   const breakpoint = useBreakpoints();
   return (
     <header>
-      <div className={pathname === "/" ? "grid content" : "gridAlternative"}>
+      <div
+        className={pathname === "/" ? "gridProject content" : "gridAlternative"}
+      >
         <Link href={"/"}>
           <Image src={logo} width={137} height={25} alt="logo +Acessivel" />
         </Link>
         {pathname === "/" && (
           <>
-            <div className="mid_box">
-              <nav>
-                <ul>
-                  <li>
-                    <a href="#">Campanhas</a>
-                  </li>
-                  <li>
-                    <a href="#">Acessibilidade</a>
-                  </li>
-                  <li></li>
-                </ul>
-              </nav>
-            </div>
             <div className="buttons">
               <button className="button_theme">
                 <Image
@@ -41,7 +30,7 @@ const Header = ({ pathname }: HeaderProps) => {
                   alt="Icone de tema"
                 />
               </button>
-              <Link href={"/register"} className="button_register">
+              <Link href={"/queixante-cadastro"} className="button_register">
                 <Image
                   src={iconUser}
                   width={14}

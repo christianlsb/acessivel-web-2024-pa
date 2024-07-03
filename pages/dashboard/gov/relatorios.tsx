@@ -1,9 +1,26 @@
 import Head from "next/head";
-import { Sidebar, Navigator } from "@/components/index";
-import jwt from "jsonwebtoken";
+import {
+  Sidebar,
+  Grafico,
+  ContainerDashboard,
+  QueixasGovernoAll,
+  Tabs,
+  NecessidadesGovernoAll,
+} from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 
-export default function Home() {
+export default function Relatorios() {
+  const tabs = [
+    {
+      title: "Queixas",
+      content: <QueixasGovernoAll />,
+    },
+    {
+      title: "Necessidades",
+      content: <NecessidadesGovernoAll />,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -16,7 +33,9 @@ export default function Home() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <Navigator />
+        <ContainerDashboard title="Relatórios">
+          <Tabs tabs={tabs} />
+        </ContainerDashboard>
       </div>
     </>
   );
@@ -38,7 +57,6 @@ export const getServerSideProps = async (
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
     return {
       props: {},
     };

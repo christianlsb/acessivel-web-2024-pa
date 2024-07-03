@@ -1,23 +1,20 @@
 import Head from "next/head";
-import { Sidebar } from "@/components/index";
+import { GovernoLogin, Header } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
-import jwt from "jsonwebtoken";
 
-export default function ContactUs() {
+export default function LoginGoverno() {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>+Acessivel</title>
         <meta
           property="og:image"
           content="assets/img/png/here-is-world-4k-61-1920x1080.jpg"
         />
         <meta name="description" content="Acessibilidade para todos" />
       </Head>
-      <div className="container-dashboard">
-        <Sidebar />
-        <h1>Fale Conosco</h1>
-      </div>
+      <Header />
+      <GovernoLogin />
     </>
   );
 }
@@ -28,26 +25,16 @@ export const getServerSideProps = async (
   const { req } = context;
   const token = req.cookies.token;
 
-  if (!token) {
+  if (token) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/home",
         permanent: false,
       },
     };
-  }
-
-  try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
+  } else {
     return {
       props: {},
-    };
-  } catch (error) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
     };
   }
 };

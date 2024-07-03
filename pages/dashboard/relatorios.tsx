@@ -1,9 +1,26 @@
 import Head from "next/head";
-import { Sidebar, Header } from "@/components/index";
+import {
+  Sidebar,
+  Grafico,
+  ContainerDashboard,
+  QueixasGovernoAll,
+  Tabs,
+  NecessidadesGovernoAll,
+} from "@/components/index";
 import { GetServerSidePropsContext } from "next";
-import jwt from "jsonwebtoken";
 
-export default function Solicit() {
+export default function Relatorios() {
+  const tabs = [
+    {
+      title: "Queixas",
+      content: <QueixasGovernoAll />,
+    },
+    {
+      title: "Necessidades",
+      content: <NecessidadesGovernoAll />,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -16,7 +33,9 @@ export default function Solicit() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Solicitações</h1>
+        <ContainerDashboard title="Relatórios">
+          <Tabs tabs={tabs} />
+        </ContainerDashboard>
       </div>
     </>
   );
@@ -38,7 +57,6 @@ export const getServerSideProps = async (
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
     return {
       props: {},
     };

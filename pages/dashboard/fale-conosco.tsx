@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { Sidebar } from "@/components/index";
+import { ContactForm, ContainerDashboard, Sidebar } from "@/components/index";
 import { GetServerSidePropsContext } from "next";
 import jwt from "jsonwebtoken";
 
-export default function Profile() {
+export default function ContactUs() {
   return (
     <>
       <Head>
@@ -16,7 +16,9 @@ export default function Profile() {
       </Head>
       <div className="container-dashboard">
         <Sidebar />
-        <h1>Perfil do Usuário</h1>
+        <ContainerDashboard title={"Fale conosco"}>
+          <ContactForm />
+        </ContainerDashboard>
       </div>
     </>
   );
@@ -38,7 +40,6 @@ export const getServerSideProps = async (
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET ?? "");
     return {
       props: {},
     };

@@ -5,56 +5,24 @@ import { z } from "zod";
 import { useRouter } from "next/router";
 import st from "@/styles/Register.module.css";
 import Image from "next/image";
-import dog from "@/assets/img/jpg/dog.jpg";
+import gov from "@/assets/img/jpg/gov.jpg";
 import cn from "classnames";
 import { Button } from "@/components/ui/button";
-import Link from "./link";
+import Link from "../link";
 import { useToast } from "@/components/ui/use-toast";
+// @ts-ignore-next-line
 
 /* VALIDAÇÃO DOS CAMPOS DO FORMULÁRIO */
 const formSchema = z
   .object({
-    nome: z
-      .string()
-      .min(1, "O nome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
-    sobrenome: z
-      .string()
-      .min(1, "O sobrenome é obrigatório")
-      .max(50, "Inválido, no máximo 50 letras")
-      .regex(
-        /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-        "Nome inválido"
-      )
-      .refine((campo) => campo.length >= 3, {
-        message: "Inválido, no mínimo 3 letras",
-      }),
     email: z
       .string()
       .min(1, "O email é obrigatório")
       .max(100, "Inválido, no máximo 100 letras")
-      .email("Email inválido") /* verificação de email existente no bd */
+      .email("Email inválido")
       .refine((campo) => campo.length >= 5, {
         message: "Inválido, no mínimo 5 letras",
       }),
-    cpf: z
-      .string()
-      .min(1, "O CPF é obrigatório")
-      .length(
-        11,
-        "O CPF deve conter 11 números"
-      ) /* verificação de cpf existente e se é válido */,
-    data_nascimento: z
-      .string()
-      .min(1, "A data de nascimento é obrigatória")
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Inválida, formato YYYY-MM-DD"),
     senha: z
       .string()
       .min(1, "A senha é obrigatória")
@@ -83,7 +51,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-const FormRegister = () => {
+const FormGoverno = () => {
   const { toast } = useToast();
   const router = useRouter();
   const [error, setError] = useState<null>();
@@ -91,6 +59,7 @@ const FormRegister = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formSchema),
@@ -100,7 +69,7 @@ const FormRegister = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch("/api/user", {
+      const response = await fetch("http://localhost:2424/queixante/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,23 +77,27 @@ const FormRegister = () => {
         body: JSON.stringify(values),
       });
 
-      if (!response.ok) {
-        const { error } = await response.json();
+      const responseEmail = await fetch("/api/post-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: values.email, nome: values.nome }),
+      });
+
+      if (!response.ok || !responseEmail.ok) {
         toast({
-          title: "Erro ao criar conta",
-          description: error,
+          title: "Erro ao solicitar cadastro!",
           variant: "destructive",
         });
-        setLoading(false);
-        throw new Error(error);
+        throw new Error("Erro ao solicitar cadastro");
       }
       toast({
-        title: "Sua conta foi criada com sucesso!",
-        description: "Use suas credenciais para acessar o portal.",
+        title: "Sua conta foi solicitada com sucesso!",
         variant: "sucess",
       });
       setTimeout(() => {
-        router.push("/login");
+        router.push("/governo-solicitacao-cadastro");
       }, 2000);
     } catch (error: any) {
       setError(error.message);
@@ -136,39 +109,15 @@ const FormRegister = () => {
       <div className={cn(st.content)}>
         {/* Imagem do Cachorro */}
         <div className={st.contentImg}>
-          <Image src={dog} width={692} height={610} alt="Imagem do cachorro" />
+          <Image src={gov} width={692} height={610} alt="Imagem do cachorro" />
         </div>
         {/* Formulário de Cadastro */}
         <div className={st.containerForm}>
           <div className={st.contentForm}>
-            <h1>Cadastro</h1>
+            <h1>Cadstro </h1>
             <p>O portal que te escuta! Estamos aqui por você.</p>
             {/* Campos */}
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className={st.fields}>
-                {/* Nome */}
-                <div className={st.field}>
-                  <label htmlFor="nome">Nome</label>
-                  <span className={st.fieldValidation}>
-                    {errors?.nome ? (errors.nome.message as string) : null}
-                  </span>
-                  <input id="nome" type="text" {...register("nome")} />
-                </div>
-                {/* Sobrenome */}
-                <div className={st.field}>
-                  <label htmlFor="sobrenome">Sobrenome</label>
-                  <span className={st.fieldValidation}>
-                    {errors?.sobrenome
-                      ? (errors.sobrenome.message as string)
-                      : null}
-                  </span>
-                  <input
-                    type="text"
-                    id="sobrenome"
-                    {...register("sobrenome")}
-                  />
-                </div>
-              </div>
               <div className={st.fields}>
                 {/* Email */}
                 <div className={cn(st.field, st.fieldEmail)}>
@@ -185,39 +134,15 @@ const FormRegister = () => {
                 </div>
               </div>
               <div className={st.fields}>
-                {/* CPF */}
-                <div className={st.field}>
-                  <label htmlFor="cpf">CPF</label>
-                  <span className={st.fieldValidation}>
-                    {errors?.cpf ? (errors.cpf.message as string) : null}
-                  </span>
-                  <input id="cpf" type="text" {...register("cpf")} />
-                </div>
-                {/* Data Nascimento */}
-                <div className={st.field}>
-                  <label htmlFor="data_nascimento">Data de nascimento</label>
-                  <span className={st.fieldValidation}>
-                    {errors?.data_nascimento
-                      ? (errors.data_nascimento.message as string)
-                      : null}
-                  </span>
-                  <input
-                    id="data_nascimento"
-                    type="text"
-                    {...register("data_nascimento")}
-                  />
-                </div>
-              </div>
-              <div className={st.fields}>
                 {/* Senha */}
                 <div className={st.field}>
                   <label htmlFor="senha">Senha</label>
                   <span className={st.fieldValidation}>
                     {errors?.senha ? (errors.senha.message as string) : null}
                   </span>
-                  <input id="senha" type="password" {...register("senha")} />
+                  <input id="senha" type="text" {...register("senha")} />
                 </div>
-                {/* Confirmar Senha */}
+                {/* Confirmar senha */}
                 <div className={st.field}>
                   <label htmlFor="confirmPassword">Confirmar senha</label>
                   <span className={st.fieldValidation}>
@@ -226,21 +151,30 @@ const FormRegister = () => {
                       : null}
                   </span>
                   <input
+                    type="text"
                     id="confirmPassword"
-                    type="password"
                     {...register("confirmPassword")}
                   />
                 </div>
               </div>
-              <Button
-                disabled={loading}
-                className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
-              >
-                {loading ? "Carregando..." : "Cadastrar"}
-              </Button>
+
+              <div className="flex gap-5">
+                <Button
+                  type="button"
+                  className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
+                >
+                  <Link href={"/"}>Cancelar</Link>
+                </Button>
+                <Button
+                  disabled={loading}
+                  className="bg-primaryBlue w-[320px] mx-auto block rounded-3xl"
+                >
+                  {loading ? "Carregando..." : "Solicitar Cadastro"}
+                </Button>
+              </div>
             </form>
             {error && <p className={st.error}>{error}</p>}
-            <Link href={"/login"}>
+            <Link className="mt-5" href={"/governo-login"}>
               Já faz parte? Clique aqui e acesse a sua conta!
             </Link>
           </div>
@@ -250,4 +184,4 @@ const FormRegister = () => {
   );
 };
 
-export default FormRegister;
+export default FormGoverno;

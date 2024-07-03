@@ -1,22 +1,40 @@
-export const dashboardLinks: DashboardLink[] = [
+import Cookies from "js-cookie";
+
+const { user } = JSON.parse(Cookies.get("user") || "{}");
+
+console.log(user);
+
+const isGoverno = true;
+const isQueixante = true;
+
+export const dashboardLinks = [
   {
     title: "Principal",
-    link: "/home",
+    link: "/dashboard/home",
   },
-  {
-    title: "Dashboard",
-    link: "/dashboard",
-  },
-  {
-    title: "Solicitações",
-    link: "/solicitacoes",
-  },
+  ...(isGoverno
+    ? [
+        {
+          title: "Relatórios",
+          link: "/dashboard/gov/relatorios",
+        },
+      ]
+    : []),
+
+  ...(isQueixante
+    ? [
+        {
+          title: "Solicitações",
+          link: "/dashboard/solicitacoes",
+        },
+      ]
+    : []),
   {
     title: "Dados Pessoais",
-    link: "/perfil",
+    link: "/dashboard/perfil",
   },
   {
     title: "Fale conosco",
-    link: "/fale-conosco",
+    link: "/dashboard/fale-conosco",
   },
 ];
